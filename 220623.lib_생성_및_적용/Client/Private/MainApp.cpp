@@ -6,6 +6,7 @@
 CMainApp::CMainApp()
 	: CBase()
 {
+
 }
 
 HRESULT CMainApp::Initialize()

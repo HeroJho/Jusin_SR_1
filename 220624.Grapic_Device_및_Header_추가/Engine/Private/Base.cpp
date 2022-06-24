@@ -1,6 +1,8 @@
 
 #include "..\Public\Base.h"
 
+using namespace Engine;
+
 unsigned long CBase::AddRef()
 {
 	return ++m_dwRefCnt;	
@@ -21,4 +23,3 @@ unsigned long CBase::Release()
 	else
 		return m_dwRefCnt--;
 }
-
