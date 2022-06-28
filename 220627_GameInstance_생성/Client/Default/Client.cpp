@@ -75,7 +75,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	}
 
-	pMainApp->Release();
+	Safe_Release(pMainApp);
 
     return (int) msg.wParam;
 }
