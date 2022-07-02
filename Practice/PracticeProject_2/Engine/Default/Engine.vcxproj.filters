@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="99.Defines">
+      <UniqueIdentifier>{ea59cde6-5c51-4db1-8b20-1d05874354e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.Base">
+      <UniqueIdentifier>{c717cab1-32cf-465b-b231-b9b4596248d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Device">
+      <UniqueIdentifier>{1323b30c-140f-4beb-bf03-9888c7d8cef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Device\Graphic">
+      <UniqueIdentifier>{506655d2-5de4-4322-bf7d-e624f9ba5e8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Device\Input">
+      <UniqueIdentifier>{b91649be-55f9-4599-a63e-15274cd723cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Device\Sound">
+      <UniqueIdentifier>{3b10e8ee-33da-4932-bfdc-2f38a52fc940}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Level">
+      <UniqueIdentifier>{7150167d-e4b3-47ab-84c2-63ed55efe6f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Level\Manager">
+      <UniqueIdentifier>{634a83b8-a20e-421f-98fb-f72d550b77d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.GameInstance">
+      <UniqueIdentifier>{5ccb5e94-3bf2-4d29-b67b-1594d849bc1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.GameObjects">
+      <UniqueIdentifier>{76bc9cd8-c33d-4309-899f-dc3ba93c4806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.GameObjects\00.Manager">
+      <UniqueIdentifier>{c5210805-eb92-4273-9337-74753741e093}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.GameObjects\00.Manager\Layer">
+      <UniqueIdentifier>{587dfbf0-64d6-4c82-b54e-e4743a41b9cf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Private\Base.cpp">
+      <Filter>98.Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Graphic_Device.cpp">
+      <Filter>01.Device\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GameInstance.cpp">
+      <Filter>00.GameInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_Manager.cpp">
+      <Filter>02.Level\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level.cpp">
+      <Filter>02.Level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GameObject.cpp">
+      <Filter>03.GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Object_Manager.cpp">
+      <Filter>03.GameObjects\00.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Layer.cpp">
+      <Filter>03.GameObjects\00.Manager\Layer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Public\Base.h">
+      <Filter>98.Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Defines.h">
+      <Filter>99.Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Function.h">
+      <Filter>99.Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Functor.h">
+      <Filter>99.Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Macro.h">
+      <Filter>99.Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Struct.h">
+      <Filter>99.Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Engine_Typedef.h">
+      <Filter>99.Defines</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Graphic_Device.h">
+      <Filter>01.Device\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_Manager.h">
+      <Filter>02.Level\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level.h">
+      <Filter>02.Level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GameInstance.h">
+      <Filter>00.GameInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GameObject.h">
+      <Filter>03.GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Object_Manager.h">
+      <Filter>03.GameObjects\00.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Layer.h">
+      <Filter>03.GameObjects\00.Manager\Layer</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

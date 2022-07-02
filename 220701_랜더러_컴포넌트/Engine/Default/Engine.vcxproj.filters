@@ -93,9 +93,11 @@
     <ClInclude Include="..\Public\Component_Manager.h">
       <Filter>04.Components\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\public\Component.h" />
     <ClInclude Include="..\Public\Renderer.h">
       <Filter>04.Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Component.h">
+      <Filter>04.Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -126,9 +128,11 @@
     <ClCompile Include="..\Private\Component_Manager.cpp">
       <Filter>04.Components\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\private\Component.cpp" />
     <ClCompile Include="..\private\Renderer.cpp">
       <Filter>04.Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Component.cpp">
+      <Filter>04.Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

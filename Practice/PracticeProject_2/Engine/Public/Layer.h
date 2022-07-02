@@ -13,9 +13,13 @@ private:
 public:
 	HRESULT Add_GameObject(class CGameObject* pGameObject);
 
+	HRESULT Initialize();
+	void Tick(_float fTimeDelta);
+	void LateTick(_float fTimeDelta);
+
 private:
-	list<class CGameObject*>				m_Objects;
-	typedef list<class CGameObject*>		OBJECTS;
+	list<class CGameObject*>			m_GameObjects;
+	typedef list<class CGameObject*>	GAMEOBJECTS;
 
 public:
 	static CLayer* Create();
