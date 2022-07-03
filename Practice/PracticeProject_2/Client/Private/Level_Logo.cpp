@@ -32,6 +32,8 @@ HRESULT CLevel_Logo::Render()
 	if(FAILED(__super::Render()))
 		return E_FAIL;
 
+	SetWindowText(g_hWnd, TEXT("로고레벨임"));
+
 	return S_OK;
 }
 
@@ -56,7 +58,15 @@ HRESULT CLevel_Logo::Ready_Layer_BackGround(const _tchar * pLayerTag)
 
 CLevel_Logo * CLevel_Logo::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	return nullptr;
+	CLevel_Logo*	pInstance = new CLevel_Logo(pGraphic_Device);
+	
+	if (FAILED(pInstance->Initialize()))
+	{
+		MSG_BOX(TEXT("Failed To Created : CLevel_Logo"));
+		Safe_Release(pInstance);
+	}
+
+	return pInstance;
 }
 
 void CLevel_Logo::Free()

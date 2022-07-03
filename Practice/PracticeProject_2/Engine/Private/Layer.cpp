@@ -18,7 +18,7 @@ HRESULT CLayer::Add_GameObject(CGameObject * pGameObject)
 
 HRESULT CLayer::Initialize()
 {
-	return E_NOTIMPL;
+	return S_OK;
 }
 
 void CLayer::Tick(_float fTimeDelta)

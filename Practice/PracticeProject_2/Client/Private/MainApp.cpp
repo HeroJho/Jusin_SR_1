@@ -23,6 +23,9 @@ HRESULT CMainApp::Initialize()
 	if (FAILED(m_pGameInstance->Initialize_Engine(LEVEL_END, GraphicDesc, &m_pGraphic_Device)))
 		return E_FAIL;
 
+	if (FAILED(Ready_Prototype_Component()))
+		return E_FAIL;
+
 	if (FAILED(Open_Level(LEVEL_LOGO)))
 		return E_FAIL;
 
@@ -42,6 +45,8 @@ HRESULT CMainApp::Render()
 {
 	m_pGameInstance->Render_Begin();
 
+	m_pRenderer->Draw();
+
 	m_pGameInstance->Render_Level();
 
 	m_pGameInstance->Render_End();
@@ -54,9 +59,28 @@ HRESULT CMainApp::Open_Level(LEVEL eLevelID)
 	if (nullptr == m_pGameInstance)
 		return E_FAIL;
 
-	if (FAILED(m_pGameInstance->Open_Level(CLevel_Loading::Create(m_pGraphic_Device, eLevelID))))
+	if (FAILED(m_pGameInstance->Open_Level(LEVEL_LOAIDING, CLevel_Loading::Create(m_pGraphic_Device, eLevelID))))
 		return E_FAIL;
 
+	return S_OK;
+}
+
+HRESULT CMainApp::Ready_Prototype_Component()
+{
+	if (nullptr == m_pGameInstance)
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"),
+		m_pRenderer = CRenderer::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	Safe_AddRef(m_pRenderer);
+
+	return S_OK;
+}
+
+HRESULT CMainApp::Ready_Prototype_GameObject()
+{
 	return S_OK;
 }
 
@@ -75,6 +99,8 @@ CMainApp * CMainApp::Create()
 
 void CMainApp::Free()
 {
+	Safe_Release(m_pGraphic_Device);
+	Safe_Release(m_pRenderer);
 	Safe_Release(m_pGameInstance);
 
 	CGameInstance::Release_Engine();

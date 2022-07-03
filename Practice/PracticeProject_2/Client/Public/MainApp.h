@@ -4,6 +4,7 @@
 #include "Base.h"
 
 BEGIN(Engine)
+class CRenderer;
 class CGameInstance;
 END
 
@@ -22,12 +23,17 @@ public:
 
 private:
 	CGameInstance*		m_pGameInstance = nullptr;
+	CRenderer*			m_pRenderer = nullptr;
 
 private:
 	LPDIRECT3DDEVICE9	m_pGraphic_Device = nullptr;
 
 private:
 	HRESULT	Open_Level(LEVEL eLevelID);
+
+private:
+	HRESULT Ready_Prototype_Component();
+	HRESULT Ready_Prototype_GameObject();
 
 public:
 	static CMainApp* Create();

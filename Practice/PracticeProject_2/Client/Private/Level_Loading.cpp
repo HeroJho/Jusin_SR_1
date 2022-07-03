@@ -52,7 +52,7 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 			if (nullptr == pNewLevel)
 				goto except;
 
-			if (FAILED(pGameInstance->Open_Level(pNewLevel)))
+			if (FAILED(pGameInstance->Open_Level(m_eNextLevel, pNewLevel)))
 				goto except;
 
 

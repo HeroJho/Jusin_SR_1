@@ -83,8 +83,6 @@ HRESULT CMainApp::Ready_Prototype_Component()
 		m_pRenderer = CRenderer::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
-
-
 	Safe_AddRef(m_pRenderer);
 
 	return S_OK;

@@ -37,6 +37,15 @@
     <Filter Include="03.GameObjects\00.Manager\Layer">
       <UniqueIdentifier>{587dfbf0-64d6-4c82-b54e-e4743a41b9cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Components">
+      <UniqueIdentifier>{dc1dab25-81df-4dde-8c1d-64bc362d7bf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Components\Component_Manager">
+      <UniqueIdentifier>{562cff28-7a36-4463-99f3-9b7258b54310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Components\Renderer">
+      <UniqueIdentifier>{53b94d6c-9b9b-4de6-8c74-ccb5833b288c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Base.cpp">
@@ -62,6 +71,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\Layer.cpp">
       <Filter>03.GameObjects\00.Manager\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Component.cpp">
+      <Filter>04.Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Component_Manager.cpp">
+      <Filter>04.Components\Component_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Renderer.cpp">
+      <Filter>04.Components\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +124,15 @@
     </ClInclude>
     <ClInclude Include="..\Public\Layer.h">
       <Filter>03.GameObjects\00.Manager\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Component.h">
+      <Filter>04.Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Component_Manager.h">
+      <Filter>04.Components\Component_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Renderer.h">
+      <Filter>04.Components\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

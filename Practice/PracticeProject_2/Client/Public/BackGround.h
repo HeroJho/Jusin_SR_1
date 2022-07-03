@@ -3,6 +3,10 @@
 #include "Client_Defines.h"
 #include "GameObject.h"
 
+BEGIN(Engine)
+class CRenderer;
+END
+
 BEGIN(Client)
 
 class CBackGround final : public CGameObject
@@ -27,6 +31,9 @@ public:
 	
 private:
 	BACKDESC				m_BackDesc;
+
+private:
+	CRenderer*				m_pRendererCom = nullptr;
 
 public:
 	static CBackGround* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
