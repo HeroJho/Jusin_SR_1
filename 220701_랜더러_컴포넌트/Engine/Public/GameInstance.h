@@ -10,6 +10,17 @@
 /* 엔진초기화. */
 /* 엔진정리. */
 
+typedef struct ENGINE_DLL tagVertex
+{
+	tagVertex() {}
+	tagVertex(float x, float y, float z)
+	{
+		_x = x; _y = y; _z = z;
+	}
+	float _x, _y, _z;
+	static const DWORD FVF;
+} VERTEX;
+
 BEGIN(Engine)
 
 class ENGINE_DLL CGameInstance final : public CBase

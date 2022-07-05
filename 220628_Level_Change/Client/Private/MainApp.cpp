@@ -83,8 +83,8 @@ CMainApp * CMainApp::Create()
 
 void CMainApp::Free()
 {
+	Safe_Release(m_pGraphic_Device);
 	Safe_Release(m_pGameInstance);
 
 	CGameInstance::Release_Engine();
-
 }

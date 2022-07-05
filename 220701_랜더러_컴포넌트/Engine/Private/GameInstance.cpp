@@ -2,6 +2,8 @@
 
 IMPLEMENT_SINGLETON(CGameInstance)
 
+const DWORD tagVertex::FVF = D3DFVF_XYZ;
+
 CGameInstance::CGameInstance()
 	: m_pGraphic_Device(CGraphic_Device::Get_Instance())
 	, m_pLevel_Manager(CLevel_Manager::Get_Instance())
@@ -147,3 +149,5 @@ void CGameInstance::Free()
 	Safe_Release(m_pGraphic_Device);
 	
 }
+
+

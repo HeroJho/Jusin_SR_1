@@ -2,7 +2,6 @@
 
 namespace Engine
 {
-
 	typedef struct tagGraphicDesc
 	{
 		enum WINMODE { MODE_FULL, MODE_WIN, MODE_END };
@@ -12,6 +11,5 @@ namespace Engine
 		unsigned int iWinSizeY;
 		WINMODE eWinMode;
 
-	}GRAPHICDESC;
-
+	} GRAPHICDESC;
 }

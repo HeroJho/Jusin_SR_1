@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Client_Defines.h"
+#include "Engine_Defines.h"
 #include "GameObject.h"
 
 BEGIN(Engine)
@@ -34,11 +35,16 @@ private:
 
 private:
 	CRenderer*				m_pRendererCom = nullptr;
+	IDirect3DVertexBuffer9* m_VB = 0;
+	IDirect3DIndexBuffer9* m_IB = 0;
 
 public:
 	static CBackGround* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
+
+private:
+	void DrawPaint();
 };
 
 END
