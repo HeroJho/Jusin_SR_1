@@ -24,16 +24,23 @@ public:
 
 
 protected:
-	LPDIRECT3DVERTEXBUFFER9	m_pVB = nullptr;		// 정점 버퍼의 컴객체
-	_uint					m_iStride = 0;			// 정점하나의 byte크기
-	_uint					m_iNumVertices = 0;		// 버텍스 수
-	_ulong					m_dwFVF = 0;			// 버텍스 구조체의 정보
-	D3DPRIMITIVETYPE		m_ePrimitiveType;		// 그릴 도형의 타입
-	_uint					m_iNumPrimitive = 0;    // 그릴 도형의 갯수
+	LPDIRECT3DVERTEXBUFFER9	m_pVB = nullptr;
+	_uint					m_iStride = 0; /* 정점하나의 byte크기 .*/
+	_uint					m_iNumVertices = 0;
+	_ulong					m_dwFVF = 0;
+	D3DPRIMITIVETYPE		m_ePrimitiveType;
+	_uint					m_iNumPrimitive = 0;
+
+protected:
+	LPDIRECT3DINDEXBUFFER9	m_pIB = nullptr;
+	_uint					m_iIndexSizeofPrimitive = 0;
+	D3DFORMAT				m_eIndexFormat;
+
 
 
 protected:
-	HRESULT Create_VertexBuffer();					// 자식의 정보를 가지고 버퍼를 만든다.
+	HRESULT Create_VertexBuffer();
+	HRESULT Create_IndexBuffer();
 
 public:
 	virtual CComponent* Clone(void* pArg) = 0;

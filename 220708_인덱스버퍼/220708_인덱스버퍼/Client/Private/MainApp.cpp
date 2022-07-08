@@ -91,6 +91,8 @@ HRESULT CMainApp::Ready_Prototype_Component()
 
 
 
+	
+
 	Safe_AddRef(m_pRenderer);
 
 	return S_OK;

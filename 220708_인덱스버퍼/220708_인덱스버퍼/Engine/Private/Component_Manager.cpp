@@ -47,7 +47,7 @@ CComponent * CComponent_Manager::Find_Component(_uint iLevelIndex, const _tchar 
 	auto	iter = find_if(m_pPrototypes[iLevelIndex].begin(), m_pPrototypes[iLevelIndex].end(), CTag_Finder(pPrototypeTag));
 
 	if (iter == m_pPrototypes[iLevelIndex].end())
-		return nullptr;
+		return nullptr;	
 
 	return iter->second;
 }
