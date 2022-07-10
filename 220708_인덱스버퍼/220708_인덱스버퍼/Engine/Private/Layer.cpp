@@ -15,6 +15,14 @@ HRESULT CLayer::Add_GameObject(CGameObject * pGameObject)
 	return S_OK;
 }
 
+CGameObject * CLayer::Get_FrontObject()
+{
+	if (m_GameObjects.empty())
+		return nullptr;
+
+	return m_GameObjects.front();
+}
+
 HRESULT CLayer::Initialize()
 {
 

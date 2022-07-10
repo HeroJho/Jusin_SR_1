@@ -12,6 +12,7 @@ public:
 
 public:
 	HRESULT Add_GameObject(class CGameObject* pGameObject);
+	CGameObject* Get_FrontObject();
 
 	HRESULT Initialize();
 	void Tick(_float fTimeDelta);

@@ -50,6 +50,4 @@ namespace Engine
 		return dwRefCnt;
 	}
 
-
-
 }

@@ -18,6 +18,8 @@ public:
 	HRESULT Reserve_Container(_uint iNumLevels);
 	HRESULT Add_Prototype(const _tchar* pPrototypeTag, class CGameObject* pPrototype);
 	HRESULT Add_GameObjectToLayer(const _tchar* pPrototypeTag, _uint iLevelIndex, const _tchar* pLayerTag, void* pArg = nullptr);
+	class CGameObject* Find_Layer_Front(_uint iLevelIndex, const _tchar* pLayerTag);
+
 
 public:
 	void Tick(_float fTimeDelta);
@@ -38,8 +40,6 @@ private: /* 사본객체들을 보관할 커넽이너ㅣ */
 private:
 	class CGameObject* Find_Prototype(const _tchar* pPrototypeTag);
 	class CLayer* Find_Layer(_uint iLevelIndex, const _tchar* pLayerTag);
-
-
 
 public:
 	virtual void Free() override;

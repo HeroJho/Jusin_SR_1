@@ -47,6 +47,10 @@ HRESULT CLevel_GamePlay::Ready_Layer_Player(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Player"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
+	CGameObject* pObject = pGameInstance->Find_Layer_Front(LEVEL_GAMEPLAY, TEXT("Layer_Player"));
+
+	pGameInstance->SetTarget(pObject);
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;

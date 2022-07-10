@@ -67,7 +67,7 @@ HRESULT CBackGround::Render()
 	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &Matrix);
 
 
-	m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	// m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
 	m_pVIBufferCom->Render();
 

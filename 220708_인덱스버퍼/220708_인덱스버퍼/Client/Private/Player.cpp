@@ -6,6 +6,7 @@
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
 {
+
 }
 
 CPlayer::CPlayer(const CPlayer & rhs)
@@ -39,6 +40,9 @@ HRESULT CPlayer::Initialize(void * pArg)
 	if (nullptr == m_pVIBufferCom)
 		return E_FAIL;
 
+	ZeroMemory(m_vPos, sizeof(_float3));
+	m_vDir = { 0.f, 0.f, 1.f };
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -46,7 +50,23 @@ HRESULT CPlayer::Initialize(void * pArg)
 
 void CPlayer::Tick(_float fTimeDelta)
 {
-	int a = 10;
+	if (GetKeyState('J') & 0x8000)
+	{
+		m_fDegree -= 0.1f;
+	}
+	if (GetKeyState('L') & 0x8000)
+	{
+		m_fDegree += 0.1f;
+	}
+	if (GetKeyState('I') & 0x8000)
+	{
+		m_vPos += 0.01f * m_vDir;
+	}
+	if (GetKeyState('K') & 0x8000)
+	{
+		m_vPos -= 0.01f * m_vDir;
+	}
+
 }
 
 void CPlayer::LateTick(_float fTimeDelta)
@@ -58,22 +78,27 @@ void CPlayer::LateTick(_float fTimeDelta)
 
 HRESULT CPlayer::Render()
 {
-	_float4x4	Matrix;
-	D3DXMatrixIdentity(&Matrix);
+	m_vDir = { 0.f, 0.f, 1.f };
+
+	_float4x4	matTotal, matScale, matRotY, matTrans;
+	D3DXMatrixIdentity(&matTotal);
+	D3DXMatrixIdentity(&matScale);
+	D3DXMatrixIdentity(&matRotY);
+	D3DXMatrixIdentity(&matTrans);
+
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+	D3DXMatrixRotationY(&matRotY, D3DXToRadian(m_fDegree));
+	D3DXMatrixTranslation(&matTrans, m_vPos.x, m_vPos.y, m_vPos.z);
+
+	matTotal = matScale * matRotY * matTrans;
+
+	m_pGraphic_Device->SetTransform(D3DTS_WORLD, &matTotal);
 
 
-	m_pGraphic_Device->SetTransform(D3DTS_WORLD, D3DXMatrixTranslation(&Matrix, 5.f, 0.f, 10.f));
 
-	_float4x4	ViewMatrix, ProjMatrix;
-	D3DXMatrixLookAtLH(&ViewMatrix, &_float3(0.f, 10.f, -15.0f), &_float3(0.f, 0.f, 0.f), &_float3(0.f, 1.f, 0.f));
-	D3DXMatrixPerspectiveFovLH(&ProjMatrix, D3DXToRadian(60.0f), g_iWinSizeX / (_float)g_iWinSizeY, 0.2f, 300.f);
+	D3DXVec3TransformNormal(&m_vDir, &m_vDir, &matTotal);
 
-	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &ViewMatrix);
-	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &ProjMatrix);
-
-	
-
-	m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	// m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
 	m_pVIBufferCom->Render();
 

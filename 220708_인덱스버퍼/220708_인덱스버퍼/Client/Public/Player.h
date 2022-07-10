@@ -37,6 +37,7 @@ private:
 	CRenderer*				m_pRendererCom = nullptr;
 	CVIBuffer_Rect*			m_pVIBufferCom = nullptr;
 
+
 public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);

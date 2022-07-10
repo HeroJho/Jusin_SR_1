@@ -22,7 +22,6 @@ public:
 
 
 
-
 protected:
 	LPDIRECT3DVERTEXBUFFER9	m_pVB = nullptr;
 	_uint					m_iStride = 0; /* 정점하나의 byte크기 .*/

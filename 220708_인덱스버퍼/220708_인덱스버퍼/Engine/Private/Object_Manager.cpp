@@ -63,6 +63,13 @@ HRESULT CObject_Manager::Add_GameObjectToLayer(const _tchar* pPrototypeTag, _uin
 	return S_OK;
 }
 
+CGameObject* CObject_Manager::Find_Layer_Front(_uint iLevelIndex, const _tchar * pLayerTag)
+{
+	CLayer* pLayer = Find_Layer(iLevelIndex, pLayerTag);
+
+	return pLayer->Get_FrontObject();
+}
+
 void CObject_Manager::Tick(_float fTimeDelta)
 {
 	for (_uint i = 0; i < m_iNumLevels; ++i)

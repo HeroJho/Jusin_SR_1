@@ -55,6 +55,15 @@
     <Filter Include="04.Components\VIBuffer\Terrain">
       <UniqueIdentifier>{34c4e090-80a0-41bf-8966-f471974cede0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Components\VIBuffer\AssignTerrain">
+      <UniqueIdentifier>{68750fa9-df24-49a2-8286-0f8a2e1b9aa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Camera">
+      <UniqueIdentifier>{4106c7c6-9c4d-41da-a759-37f45645e178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Camera\Manager">
+      <UniqueIdentifier>{e23b3216-9eab-40fa-a237-0649a3715d1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\Base.h">
@@ -117,6 +126,12 @@
     <ClInclude Include="..\Public\VIBuffer_Terrain.h">
       <Filter>04.Components\VIBuffer\Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_AssignTerrain.h">
+      <Filter>04.Components\VIBuffer\AssignTerrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Camera_Manager.h">
+      <Filter>05.Camera\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Base.cpp">
@@ -160,6 +175,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\VIBuffer_Terrain.cpp">
       <Filter>04.Components\VIBuffer\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_AssignTerrain.cpp">
+      <Filter>04.Components\VIBuffer\AssignTerrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Camera_Manager.cpp">
+      <Filter>05.Camera\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

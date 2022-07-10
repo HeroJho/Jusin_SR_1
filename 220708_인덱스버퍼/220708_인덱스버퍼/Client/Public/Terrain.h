@@ -6,6 +6,7 @@
 BEGIN(Engine)
 class CRenderer;
 class CVIBuffer_Terrain;
+class CVIBuffer_AssignTerrain;
 END
 
 BEGIN(Client)
@@ -26,7 +27,8 @@ public:
 
 private:
 	CRenderer*				m_pRendererCom = nullptr;
-	CVIBuffer_Terrain*		m_pVIBufferCom = nullptr;
+	CVIBuffer_AssignTerrain*		m_pVIBufferCom = nullptr;
+
 
 public:
 	static CTerrain* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

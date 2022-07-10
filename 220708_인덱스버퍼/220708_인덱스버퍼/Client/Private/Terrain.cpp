@@ -32,7 +32,7 @@ HRESULT CTerrain::Initialize(void * pArg)
 
 	//m_Components.emplace(TEXT("Com_REnderer"), m_pRendererCom);
 
-	m_pVIBufferCom = (CVIBuffer_Terrain*)pGameInstance->Clone_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Terrain"));
+	m_pVIBufferCom = (CVIBuffer_AssignTerrain*)pGameInstance->Clone_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Terrain"));
 	if (nullptr == m_pVIBufferCom)
 		return E_FAIL;
 
@@ -43,7 +43,7 @@ HRESULT CTerrain::Initialize(void * pArg)
 
 void CTerrain::Tick(_float fTimeDelta)
 {
-	int a = 10;
+
 }
 
 void CTerrain::LateTick(_float fTimeDelta)
@@ -59,12 +59,6 @@ HRESULT CTerrain::Render()
 
 	m_pGraphic_Device->SetTransform(D3DTS_WORLD, &Matrix);
 
-		_float4x4	ViewMatrix, ProjMatrix;
-		D3DXMatrixLookAtLH(&ViewMatrix, &_float3(0.f, 10.f, -15.0f), &_float3(0.f, 0.f, 0.f), &_float3(0.f, 1.f, 0.f));
-		D3DXMatrixPerspectiveFovLH(&ProjMatrix, D3DXToRadian(60.0f), g_iWinSizeX / (_float)g_iWinSizeY, 0.2f, 300.f);
-
-		m_pGraphic_Device->SetTransform(D3DTS_VIEW, &ViewMatrix);
-		m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &ProjMatrix);
 
 	m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 

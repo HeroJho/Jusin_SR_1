@@ -7,11 +7,13 @@ CGameInstance::CGameInstance()
 	, m_pLevel_Manager(CLevel_Manager::Get_Instance())
 	, m_pObject_Manager(CObject_Manager::Get_Instance())
 	, m_pComponent_Manager(CComponent_Manager::Get_Instance())
+	, m_pCamera_Manager(CCamera_Manager::Get_Instance())
 {
 	Safe_AddRef(m_pComponent_Manager);
 	Safe_AddRef(m_pObject_Manager);
 	Safe_AddRef(m_pLevel_Manager);
 	Safe_AddRef(m_pGraphic_Device);
+	Safe_AddRef(m_pCamera_Manager);
 }
 
 
@@ -30,6 +32,9 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, const GRAPHICDESC& Gr
 
 	/* 사운드 초기화. */
 
+	if (FAILED(m_pCamera_Manager->InitCam(GraphicDesc.iWinSizeX, GraphicDesc.iWinSizeY)))
+		return E_FAIL;
+
 	if (FAILED(m_pObject_Manager->Reserve_Container(iNumLevels)))
 		return E_FAIL;
 
@@ -44,6 +49,8 @@ void CGameInstance::Tick_Engine(_float fTimeDelta)
 	if (nullptr == m_pLevel_Manager || 
 		nullptr == m_pObject_Manager)
 		return;
+
+	m_pCamera_Manager->Tick(fTimeDelta);
 
 	m_pObject_Manager->Tick(fTimeDelta);
 
@@ -110,6 +117,14 @@ HRESULT CGameInstance::Add_GameObjectToLayer(const _tchar * pPrototypeTag, _uint
 	return m_pObject_Manager->Add_GameObjectToLayer(pPrototypeTag, iLevelIndex, pLayerTag, pArg);
 }
 
+CGameObject* CGameInstance::Find_Layer_Front(_uint iLevelIndex, const _tchar * pLayerTag)
+{
+	if (nullptr == m_pObject_Manager)
+		return nullptr;
+
+	return m_pObject_Manager->Find_Layer_Front(iLevelIndex, pLayerTag);
+}
+
 HRESULT CGameInstance::Add_Prototype(_uint iLevelIndex, const _tchar * pPrototypeTag, CComponent * pPrototype)
 {
 	if (nullptr == m_pComponent_Manager)
@@ -126,6 +141,23 @@ CComponent * CGameInstance::Clone_Component(_uint iLevelIndex, const _tchar * pP
 	return m_pComponent_Manager->Clone_Component(iLevelIndex, pPrototypeTag, pArg);	
 }
 
+HRESULT CGameInstance::SetCamMatrix()
+{
+	if (nullptr == m_pCamera_Manager)
+		return E_FAIL;
+
+	m_pCamera_Manager->SetCamMatrix();
+	return S_OK;
+}
+
+void CGameInstance::SetTarget(CGameObject * pTarget)
+{
+	if (nullptr == m_pCamera_Manager)
+		return;
+
+	m_pCamera_Manager->SetTarget(pTarget);
+}
+
 void CGameInstance::Release_Engine()
 {
 	CGameInstance::Get_Instance()->Destroy_Instance();
@@ -136,6 +168,8 @@ void CGameInstance::Release_Engine()
 
 	CLevel_Manager::Get_Instance()->Destroy_Instance();
 	
+	CCamera_Manager::Get_Instance()->Destroy_Instance();
+
 	CGraphic_Device::Get_Instance()->Destroy_Instance();
 }
 
@@ -145,5 +179,5 @@ void CGameInstance::Free()
 	Safe_Release(m_pObject_Manager);
 	Safe_Release(m_pLevel_Manager);
 	Safe_Release(m_pGraphic_Device);
-	
+	Safe_Release(m_pCamera_Manager);
 }
