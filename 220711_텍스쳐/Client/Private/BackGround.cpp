@@ -26,8 +26,8 @@ HRESULT CBackGround::Initialize(void * pArg)
 		m_BackDesc = *(BACKDESC*)pArg;
 	}
 
-	/* 내일 이거 수정해라. */
-
+	/* 1. 내일 이거 수정해라. */
+	/* 2. 월드행렬을ㅇ 관리하는 CTransform 제ㅈ닥. */
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
@@ -37,6 +37,10 @@ HRESULT CBackGround::Initialize(void * pArg)
 
 	m_pVIBufferCom = (CVIBuffer_Rect*)pGameInstance->Clone_Component(LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Rect"));
 	if (nullptr == m_pVIBufferCom)
+		return E_FAIL;
+
+	m_pTextureCom = (CTexture*)pGameInstance->Clone_Component(LEVEL_LOGO, TEXT("Prototype_Component_Texture_Default"));
+	if (nullptr == m_pTextureCom)
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -61,13 +65,14 @@ HRESULT CBackGround::Render()
 	_float4x4	Matrix;
 	D3DXMatrixIdentity(&Matrix);
 
+	// m_pGraphic_Device->SetTexture(0, m_pTextureCom->Get_Texture);
+
+	if (FAILED(m_pTextureCom->Bind_Texture(0)))
+		return E_FAIL;
 
 	m_pGraphic_Device->SetTransform(D3DTS_WORLD, &Matrix);
 	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &Matrix);
 	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &Matrix);
-
-
-	m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
 	m_pVIBufferCom->Render();
 
@@ -104,6 +109,7 @@ void CBackGround::Free()
 {
 	__super::Free();
 
+	Safe_Release(m_pTextureCom);
 	Safe_Release(m_pVIBufferCom);
 	Safe_Release(m_pRendererCom);
 }

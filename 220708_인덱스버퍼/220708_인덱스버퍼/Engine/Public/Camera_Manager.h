@@ -30,6 +30,8 @@ private:
 	CGameObject*		m_pTarget = nullptr;
 	
 	_float3		m_pPos;
+	_float		m_fA = 60.f;
+	_bool		m_bCamMode = false;
 
 public:
 	virtual void Free() override;
