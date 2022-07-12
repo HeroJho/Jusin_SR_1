@@ -49,7 +49,7 @@ HRESULT CVIBuffer_AssignTerrain::Initialize_Prototype()
 		{
 			int iIndex = i * m_iSizeTerrain + j;
 			pVertices[iIndex].vPosition = _float3(_float(j), _float(GetRendNum(0, 0)), _float(i));
-			pVertices[iIndex].vTexture = _float2(0.f, 0.f);
+			pVertices[iIndex].vTexture = _float2(j / _float(m_iSizeTerrain - 1), i / _float(m_iSizeTerrain - 1));
 		}
 	}
 

@@ -36,6 +36,11 @@ HRESULT CTerrain::Initialize(void * pArg)
 	if (nullptr == m_pVIBufferCom)
 		return E_FAIL;
 
+
+	m_pTextureCom = (CTexture*)pGameInstance->Clone_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Terrain"));
+	if (nullptr == m_pTextureCom)
+		return E_FAIL;
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -59,8 +64,10 @@ HRESULT CTerrain::Render()
 
 	m_pGraphic_Device->SetTransform(D3DTS_WORLD, &Matrix);
 
+	if (FAILED(m_pTextureCom->Bind_Texture(0)))
+		return E_FAIL;
 
-	m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	// m_pGraphic_Device->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
 	m_pVIBufferCom->Render();
 
@@ -97,6 +104,7 @@ void CTerrain::Free()
 {
 	__super::Free();
 
+	Safe_Release(m_pTextureCom);
 	Safe_Release(m_pVIBufferCom);
 	Safe_Release(m_pRendererCom);
 }

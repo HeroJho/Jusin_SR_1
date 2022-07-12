@@ -127,11 +127,6 @@ void CGraphic_Device::Render_Begin(void)
 
 	//여기서부터 후면버퍼에 그리기 시점을 알린다.
 	m_pDevice->BeginScene();
-
-	// 2D 이미지를 그릴 수 있도록 장치에게 알림, 현재 렌더링 옵션은 매개변수로 넣어줌
-	// 알파테스트가 유효한 상태에서 알파블렌딩을 사용하겠다는 옵션
-	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
-
 }
 
 void CGraphic_Device::Render_End(HWND hWnd)

@@ -88,7 +88,7 @@ HRESULT CPlayer::Render()
 
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
 	D3DXMatrixRotationY(&matRotY, D3DXToRadian(m_fDegree));
-	D3DXMatrixTranslation(&matTrans, m_vPos.x, m_vPos.y, m_vPos.z);
+	D3DXMatrixTranslation(&matTrans, m_vPos.x, m_vPos.y + 0.5f, m_vPos.z);
 
 	matTotal = matScale * matRotY * matTrans;
 

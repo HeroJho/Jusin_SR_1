@@ -86,7 +86,7 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
-
+	// ==============================================================================================================
 	lstrcpy(m_szLoadingText, TEXT("객체원형을 로딩중입니다. "));
 
 	/* 개ㅑㄱ체원형 로드한다. */
@@ -102,7 +102,7 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 
 
-
+	// ==============================================================================================================
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
 	/* 텍스쳐를 로드한다. */
 	/* For.Prototype_Component_Texture_Terrain */
@@ -116,6 +116,8 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		return E_FAIL;
 
 
+
+	// ==============================================================================================================
 	lstrcpy(m_szLoadingText, TEXT("모델을 로딩중입니다. "));
 	/* 모델를 로드한다. */
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Terrain"),

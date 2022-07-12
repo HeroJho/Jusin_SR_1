@@ -98,7 +98,6 @@ HRESULT CPlayer::Set_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 254);
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 
-
 	return S_OK;
 }
 

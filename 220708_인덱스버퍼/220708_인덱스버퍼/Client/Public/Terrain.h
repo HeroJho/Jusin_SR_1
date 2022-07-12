@@ -4,6 +4,7 @@
 #include "GameObject.h"
 
 BEGIN(Engine)
+class CTexture;
 class CRenderer;
 class CVIBuffer_Terrain;
 class CVIBuffer_AssignTerrain;
@@ -26,6 +27,7 @@ public:
 	virtual HRESULT Render() override;
 
 private:
+	CTexture*				m_pTextureCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;
 	CVIBuffer_AssignTerrain*		m_pVIBufferCom = nullptr;
 
