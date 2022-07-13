@@ -5,6 +5,7 @@
 #include "BackGround.h"
 #include "Terrain.h"
 #include "Player.h"
+#include "Monster.h"
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
@@ -100,6 +101,9 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		CPlayer::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Monster"),
+		CMonster::Create(m_pGraphic_Device))))
+		return E_FAIL;
 
 
 
@@ -113,6 +117,11 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	/* For.Prototype_Component_Texture_Player */
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Player.png")))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_Texture_Monster */
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Monster"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/AKIHA_AKI00_000.png")))))
 		return E_FAIL;
 
 

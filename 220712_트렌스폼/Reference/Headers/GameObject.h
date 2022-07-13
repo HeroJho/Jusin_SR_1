@@ -28,7 +28,7 @@ protected: /* 객체에게 추가된 컴포넌트들을 키로 분류하여 보관한다. */
 protected:
 	HRESULT Add_Component(_uint iLevelIndex, const _tchar* pPrototypeTag, const _tchar* pComponentTag, class CComponent** ppOut, void* pArg = nullptr);
 
-private:
+public:
 	class CComponent* Find_Component(const _tchar* pComponentTag);
 
 public:

@@ -34,6 +34,7 @@ public:
 		m_WorldMatrix.m[eState][0] = *State; 
 	}
 
+	_float3 Get_Pos() { return Get_State(STATE_POSITION); }
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -45,6 +46,9 @@ public:
 public:
 	void Go_Straight(_float fTimeDelta);
 	void Go_Backward(_float fTimeDelta);
+	void Rot_Right(_float fTimeDelta);
+	void Rot_Left(_float fTimeDelta);
+	void Go_Pos(_float fTimeDelta, _float3 vTargetPos);
 
 
 private:

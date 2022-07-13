@@ -37,7 +37,19 @@ void CPlayer::Tick(_float fTimeDelta)
 	{
 		m_pTransformCom->Go_Backward(fTimeDelta);
 	}
+
+	if (GetKeyState(VK_LEFT) & 0x8000)
+	{
+		m_pTransformCom->Rot_Left(fTimeDelta);
+	}
+
+	if (GetKeyState(VK_RIGHT) & 0x8000)
+	{
+		m_pTransformCom->Rot_Right(fTimeDelta);
+	}
 	
+	// m_pTransformCom->Go_Pos(fTimeDelta, _float3{ 50.f, 0.f, 50.f });
+
 }
 
 void CPlayer::LateTick(_float fTimeDelta)
@@ -54,7 +66,7 @@ HRESULT CPlayer::Render()
 		return E_FAIL;	
 
 	_float4x4	ViewMatrix, ProjMatrix;
-	D3DXMatrixLookAtLH(&ViewMatrix, &_float3(0.f, 0.5f, -1.0f), &_float3(0.f, 0.f, 0.f), &_float3(0.f, 1.f, 0.f));
+	D3DXMatrixLookAtLH(&ViewMatrix, &_float3(10.f, 10.f, -5.0f), &_float3(10.f, 0.f, 20.f), &_float3(0.f, 1.f, 0.f));
 	D3DXMatrixPerspectiveFovLH(&ProjMatrix, D3DXToRadian(60.0f), g_iWinSizeX / (_float)g_iWinSizeY, 0.2f, 300.f);
 
 	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &ViewMatrix);

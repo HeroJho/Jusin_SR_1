@@ -1,0 +1,153 @@
+#include "stdafx.h"
+#include "..\Public\Monster.h"
+
+#include "GameInstance.h"
+#include "Player.h"
+
+CMonster::CMonster(LPDIRECT3DDEVICE9 pGraphic_Device)
+	: CGameObject(pGraphic_Device)
+{
+}
+
+CMonster::CMonster(const CMonster & rhs)
+	: CGameObject(rhs)
+{
+}
+
+HRESULT CMonster::Initialize_Prototype()
+{
+	return S_OK;
+}
+
+HRESULT CMonster::Initialize(void * pArg)
+{
+	if (FAILED(SetUp_Components()))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+void CMonster::Tick(_float fTimeDelta)
+{
+	_float3 vTargetPos = ((CTransform*)CGameInstance::Get_Instance()->Get_Player()->Find_Component(TEXT("Com_Transform")))->Get_Pos();
+	m_pTransformCom->Go_Pos(fTimeDelta, vTargetPos);
+}
+
+void CMonster::LateTick(_float fTimeDelta)
+{
+	
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+}
+
+HRESULT CMonster::Render()
+{
+
+	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
+		return E_FAIL;	
+
+	_float4x4	ViewMatrix, ProjMatrix;
+	D3DXMatrixLookAtLH(&ViewMatrix, &_float3(10.f, 10.f, -5.0f), &_float3(10.f, 0.f, 20.f), &_float3(0.f, 1.f, 0.f));
+	D3DXMatrixPerspectiveFovLH(&ProjMatrix, D3DXToRadian(60.0f), g_iWinSizeX / (_float)g_iWinSizeY, 0.2f, 300.f);
+
+	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &ViewMatrix);
+	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &ProjMatrix);
+
+	if (FAILED(m_pTextureCom->Bind_Texture(0)))
+		return E_FAIL;
+
+	if (FAILED(Set_RenderState()))
+		return E_FAIL;
+
+	m_pVIBufferCom->Render();
+
+	if (FAILED(Reset_RenderState()))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+HRESULT CMonster::Set_RenderState()
+{
+	if (nullptr == m_pGraphic_Device)
+		return E_FAIL;
+
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);	
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 254);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+
+
+	return S_OK;
+}
+
+HRESULT CMonster::Reset_RenderState()
+{
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+
+	return S_OK;
+}
+
+HRESULT CMonster::SetUp_Components()
+{
+	/* For.Com_Renderer */
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
+		return E_FAIL;
+
+	/* For.Com_VIBuffer */
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Rect"), TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
+		return E_FAIL;
+
+	/* For.Com_Texture */
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Monster"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+		return E_FAIL;
+
+	/* For.Com_Transform */
+	CTransform::TRANSFORMDESC		TransformDesc;
+	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
+
+	TransformDesc.fSpeedPerSec = 1.f;
+	TransformDesc.fRotationPerSec = D3DXToRadian(90.0f);
+
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
+		return E_FAIL;
+
+
+
+	return S_OK;
+}
+
+CMonster * CMonster::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+{
+	CMonster*		pInstance = new CMonster(pGraphic_Device);
+
+	if (FAILED(pInstance->Initialize_Prototype()))
+	{
+		MSG_BOX(TEXT("Failed To Created : CMonster"));
+		Safe_Release(pInstance);
+	}
+
+	return pInstance;
+}
+
+CGameObject * CMonster::Clone(void* pArg)
+{
+	CMonster*		pInstance = new CMonster(*this);
+
+	if (FAILED(pInstance->Initialize(pArg)))
+	{
+		MSG_BOX(TEXT("Failed To Created : CMonster"));
+		Safe_Release(pInstance);
+	}
+
+	return pInstance;
+}
+
+void CMonster::Free()
+{
+	__super::Free();
+
+	Safe_Release(m_pTransformCom);
+	Safe_Release(m_pTextureCom);
+	Safe_Release(m_pVIBufferCom);
+	Safe_Release(m_pRendererCom);
+}
+

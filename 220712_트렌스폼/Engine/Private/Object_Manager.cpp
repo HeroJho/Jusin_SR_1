@@ -63,6 +63,12 @@ HRESULT CObject_Manager::Add_GameObjectToLayer(const _tchar* pPrototypeTag, _uin
 	return S_OK;
 }
 
+CGameObject * CObject_Manager::Get_Player()
+{
+	CLayer* pLayer = Find_Layer(3, TEXT("Layer_Player"));
+	return pLayer->Get_Front();
+}
+
 void CObject_Manager::Tick(_float fTimeDelta)
 {
 	for (_uint i = 0; i < m_iNumLevels; ++i)
@@ -75,7 +81,6 @@ void CObject_Manager::Tick(_float fTimeDelta)
 			}
 		}			
 	}
-	
 	
 }
 

@@ -83,6 +83,7 @@ HRESULT CMainApp::Ready_Default_RenderState()
 		return E_FAIL;
 
 	m_pGraphic_Device->SetRenderState(D3DRS_LIGHTING, FALSE);
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
 	return S_OK;
 }
