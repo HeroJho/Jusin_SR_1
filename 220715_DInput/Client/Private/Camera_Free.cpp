@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "..\Public\Camera_Free.h"
+#include "GameInstance.h"
 
 CCamera_Free::CCamera_Free(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCamera(pGraphic_Device)
@@ -9,6 +10,7 @@ CCamera_Free::CCamera_Free(LPDIRECT3DDEVICE9 pGraphic_Device)
 CCamera_Free::CCamera_Free(const CCamera_Free & rhs, CTransform::TRANSFORMDESC * pArg)
 	: CCamera(rhs, pArg)
 {
+
 }
 
 HRESULT CCamera_Free::Initialize_Prototype()
@@ -31,27 +33,48 @@ HRESULT CCamera_Free::Initialize(void * pArg)
 
 void CCamera_Free::Tick(_float fTimeDelta)
 {
-	if (GetKeyState('W') & 0x8000)
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	if (pGameInstance->Get_DIKState(DIK_W) & 0x80)
 	{
 		m_pTransformCom->Go_Straight(fTimeDelta);
 	}
 
-	if (GetKeyState('S') & 0x8000)
+	if (pGameInstance->Get_DIKState(DIK_S) & 0x80)
 	{
 		m_pTransformCom->Go_Backward(fTimeDelta);
 	}
 
-	if (GetKeyState('A') & 0x8000)
+	if (pGameInstance->Get_DIKState(DIK_A) & 0x80)
 	{
 		m_pTransformCom->Go_Left(fTimeDelta);
 	}
 
-	if (GetKeyState('D') & 0x8000)
+	if (pGameInstance->Get_DIKState(DIK_D) & 0x80)
 	{
 		m_pTransformCom->Go_Right(fTimeDelta);
 	}
 
+	_long	MouseMove = 0;
+
+	if (MouseMove = pGameInstance->Get_DIMMoveState(DIMM_X))
+	{
+		m_pTransformCom->Turn(_float3(0.f, 1.f, 0.f), MouseMove * fTimeDelta * 0.05f);		
+	}
+
+	if (MouseMove = pGameInstance->Get_DIMMoveState(DIMM_Y))
+	{
+		m_pTransformCom->Turn(m_pTransformCom->Get_State(CTransform::STATE_RIGHT), MouseMove * fTimeDelta * 0.05f);
+	}
+
+	
+
+	Safe_Release(pGameInstance);
+
 	__super::Tick(fTimeDelta);
+
+
 
 }
 
