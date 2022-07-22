@@ -1,5 +1,7 @@
 #include "..\Public\GameInstance.h"
 
+#include "Cube.h"
+
 IMPLEMENT_SINGLETON(CGameInstance)
 
 CGameInstance::CGameInstance()
@@ -40,6 +42,12 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInst, cons
 
 	if (FAILED(m_pComponent_Manager->Reserve_Container(iNumLevels)))
 		return E_FAIL;
+
+	/* For.Prototype_GameObject_Block */
+	if (FAILED(Add_Prototype(TEXT("Prototype_GameObject_Cube"),
+		CCube::Create(m_pGraphic_Device->Get_Device()))))
+		return E_FAIL;
+
 
 	return S_OK;
 }

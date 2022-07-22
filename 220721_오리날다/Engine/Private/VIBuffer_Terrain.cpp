@@ -97,15 +97,18 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(const _tchar * pHeightMap)
 
 	_ulong			dwByte = 0;
 
+	// 헤더 정보들을 가져온다
 	BITMAPFILEHEADER		fh;
 	ReadFile(hFile, &fh, sizeof(BITMAPFILEHEADER), &dwByte, nullptr);
 
 	BITMAPINFOHEADER		ih;
 	ReadFile(hFile, &ih, sizeof(BITMAPINFOHEADER), &dwByte, nullptr);
 
+	// 가로, 세로 크기를 가져온다.
 	m_iNumVerticesX = ih.biWidth;
 	m_iNumVerticesZ = ih.biHeight;
 
+	// 픽셀 정보를 읽어온다.
 	_ulong*			pPixel = new _ulong[m_iNumVerticesX * m_iNumVerticesZ];
 	ZeroMemory(pPixel, sizeof(_ulong) * m_iNumVerticesX * m_iNumVerticesZ);
 

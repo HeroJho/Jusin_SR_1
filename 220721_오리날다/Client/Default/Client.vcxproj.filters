@@ -43,6 +43,9 @@
     <Filter Include="02.GameObject\Sky">
       <UniqueIdentifier>{c5e904f6-85e8-4113-8372-a133625f1d33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Blcok">
+      <UniqueIdentifier>{6dbad615-f257-4800-a480-ae87745507de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -91,6 +94,9 @@
     <ClInclude Include="..\public\Camera_Free.h">
       <Filter>02.GameObject\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Block.h">
+      <Filter>02.GameObject\Blcok</Filter>
+    </ClInclude>
     <ClInclude Include="..\Public\Sky.h">
       <Filter>02.GameObject\Sky</Filter>
     </ClInclude>
@@ -134,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Sky.cpp">
       <Filter>02.GameObject\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Block.cpp">
+      <Filter>02.GameObject\Blcok</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

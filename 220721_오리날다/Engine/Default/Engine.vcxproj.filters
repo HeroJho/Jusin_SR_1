@@ -73,6 +73,12 @@
     <Filter Include="04.Components\VIBuffer\Cube">
       <UniqueIdentifier>{87258bbe-28c6-4a35-b632-49704028cd53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Components\Boxel">
+      <UniqueIdentifier>{6298146d-c22e-4ef2-b359-b1e6eb3a58ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Components\Boxel\Cube">
+      <UniqueIdentifier>{80cec489-b3d6-43b0-8be4-fab3b52b48ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\Base.h">
@@ -156,6 +162,12 @@
     <ClInclude Include="..\Public\VIBuffer_Cube.h">
       <Filter>04.Components\VIBuffer\Cube</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Boxel.h">
+      <Filter>04.Components\Boxel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Cube.h">
+      <Filter>04.Components\Boxel\Cube</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Base.cpp">
@@ -220,6 +232,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\VIBuffer_Cube.cpp">
       <Filter>04.Components\VIBuffer\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Boxel.cpp">
+      <Filter>04.Components\Boxel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Cube.cpp">
+      <Filter>04.Components\Boxel\Cube</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

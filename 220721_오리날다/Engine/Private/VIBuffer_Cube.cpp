@@ -26,6 +26,7 @@ HRESULT CVIBuffer_Cube::Initialize_Prototype()
 
 	m_pVB->Lock(0, /*m_iStride * m_iNumVertices*/0, (void**)&pVertices, 0);
 
+	// 정면
 	pVertices[0].vPosition = _float3(-0.5f, 0.5f, -0.5f);
 	pVertices[0].vTexture = pVertices[0].vPosition;
 	pVertices[1].vPosition = _float3(0.5f, 0.5f, -0.5f);
@@ -35,6 +36,7 @@ HRESULT CVIBuffer_Cube::Initialize_Prototype()
 	pVertices[3].vPosition = _float3(-0.5f, -0.5f, -0.5f);
 	pVertices[3].vTexture = pVertices[3].vPosition;
 
+	// 후면
 	pVertices[4].vPosition = _float3(-0.5f, 0.5f, 0.5f);
 	pVertices[4].vTexture = pVertices[4].vPosition;
 	pVertices[5].vPosition = _float3(0.5f, 0.5f, 0.5f);

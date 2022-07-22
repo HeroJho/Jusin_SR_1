@@ -8,6 +8,7 @@
 #include "Monster.h"
 #include "Player.h"
 #include "Sky.h"
+#include "Block.h"
 
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -119,6 +120,13 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		CSky::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	/* For.Prototype_GameObject_Block */
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Block"),
+		CBlock::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+
+
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
 	/* 텍스쳐를 로드한다. */
 	/* For.Prototype_Component_Texture_Terrain */
@@ -145,19 +153,27 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		CVIBuffer_Terrain::Create(m_pGraphic_Device, TEXT("../Bin/Resources/Textures/Terrain/Height.bmp")))))
 		return E_FAIL;
 
-	D3DXPLANE		Plane;
+	//D3DXPLANE		Plane;
 
-	D3DXPlaneFromPointNormal(&Plane, );
-	D3DXPlaneFromPoints(&Plane, , , );
+	//D3DXPlaneFromPointNormal(&Plane, );
+	//D3DXPlaneFromPoints(&Plane, , , );
 
-	ax + by + cz + d = 0;
+	//ax + by + cz + d = 0;
 
-	y = (-ax - cz - d) / b
+	//y = (-ax - cz - d) / b
 
 	/* For.Prototype_Component_VIBuffer_Cube */
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Cube"),
 		CVIBuffer_Cube::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+
+
+	lstrcpy(m_szLoadingText, TEXT("맵을 로딩중입니다. "));
+
+
+
+
 
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니ㅏㄷ.  "));
 
