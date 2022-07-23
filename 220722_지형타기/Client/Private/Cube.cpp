@@ -1,51 +1,57 @@
 #include "stdafx.h"
-#include "..\Public\Sky.h"
+#include "..\Public\Cube.h"
 
 #include "GameInstance.h"
 
-CSky::CSky(LPDIRECT3DDEVICE9 pGraphic_Device)
+CCube::CCube(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
 {
 }
 
-CSky::CSky(const CSky & rhs)
+CCube::CCube(const CCube & rhs)
 	: CGameObject(rhs)
 {
 }
 
 
-HRESULT CSky::Initialize_Prototype()
+HRESULT CCube::Initialize_Prototype()
 {
 	return S_OK;
 }
 
-HRESULT CSky::Initialize(void * pArg)
+HRESULT CCube::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;	
 
+	if (nullptr == pArg)
+		return E_FAIL;
+
+	CMap_Manager::CUBEDATA* pData = (CMap_Manager::CUBEDATA*)pArg;
+
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pData->vPos);
 
 	return S_OK;
 }
 
-void CSky::Tick(_float fTimeDelta)
+void CCube::Tick(_float fTimeDelta)
 {
-	m_pTransformCom->Turn(_float3{ 0.f, 1.f, 0.f }, fTimeDelta);
+	
 }
 
-void CSky::LateTick(_float fTimeDelta)
+void CCube::LateTick(_float fTimeDelta)
 {
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 }
 
-HRESULT CSky::Render()
+HRESULT CCube::Render()
 {
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;	
 	
-	//if (FAILED(m_pTextureCom->Bind_Texture(0)))
-	//	return E_FAIL;
+	if (FAILED(m_pTextureCom->Bind_Texture(0)))
+		return E_FAIL;
 
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
@@ -58,7 +64,7 @@ HRESULT CSky::Render()
 	return S_OK;
 }
 
-HRESULT CSky::Set_RenderState()
+HRESULT CCube::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
@@ -68,26 +74,27 @@ HRESULT CSky::Set_RenderState()
 	return S_OK;
 }
 
-HRESULT CSky::Reset_RenderState()
+HRESULT CCube::Reset_RenderState()
 {
 
 
 	return S_OK;
 }
 
-HRESULT CSky::SetUp_Components()
+HRESULT CCube::SetUp_Components()
 {
 	/* For.Com_Renderer */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
 		return E_FAIL;
 
 	/* For.Com_VIBuffer */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Tree"), TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Cube"), TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
+		return E_FAIL;
+
+	/* For.Com_Texture */
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 	
-	/* For.Com_Texture */
-	//if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
-	//	return E_FAIL;
 
 	/* For.Com_Transform */
 	CTransform::TRANSFORMDESC		TransformDesc;
@@ -102,33 +109,33 @@ HRESULT CSky::SetUp_Components()
 	return S_OK;
 }
 
-CSky * CSky::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CCube * CCube::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CSky*		pInstance = new CSky(pGraphic_Device);
+	CCube*		pInstance = new CCube(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CSky"));
+		MSG_BOX(TEXT("Failed To Created : CCube"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CSky::Clone(void* pArg)
+CGameObject * CCube::Clone(void* pArg)
 {
-	CSky*		pInstance = new CSky(*this);
+	CCube*		pInstance = new CCube(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Created : CSky"));
+		MSG_BOX(TEXT("Failed To Cloned : CCube"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CSky::Free()
+void CCube::Free()
 {
 	__super::Free();
 

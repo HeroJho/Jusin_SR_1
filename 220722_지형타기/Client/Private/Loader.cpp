@@ -8,6 +8,7 @@
 #include "Monster.h"
 #include "Player.h"
 #include "Sky.h"
+#include "Cube.h"
 
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -119,6 +120,12 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		CSky::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	/* For.Prototype_GameObject_Cube */
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Cube"),
+		CCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
 	/* 텍스쳐를 로드한다. */
 	/* For.Prototype_Component_Texture_Terrain */
@@ -149,6 +156,38 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Cube"),
 		CVIBuffer_Cube::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+
+	vector<tagVertexColor> tempTest;
+	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 0.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
+	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 1.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
+	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 2.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
+	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 3.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
+
+	tempTest.push_back(tagVertexColor{ _float3{ 1.f, 3.f, 0.f }, D3DCOLOR_XRGB(0, 255, 0) });
+	tempTest.push_back(tagVertexColor{ _float3{ -1.f, 3.f, 0.f }, D3DCOLOR_XRGB(0, 255, 0) });
+	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 3.f, -1.f }, D3DCOLOR_XRGB(0, 255, 0) });
+	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 3.f, 1.f }, D3DCOLOR_XRGB(0, 255, 0) });
+	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 4.f, 0.f }, D3DCOLOR_XRGB(0, 255, 0) });
+
+	/* For.Prototype_Component_VIBuffer_Voxel */
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Tree"),
+		CVIBuffer_Voxel::Create(m_pGraphic_Device, &tempTest))))
+		return E_FAIL;
+
+
+	vector<tagVertexColor> tempTest1;
+	tempTest1.push_back(tagVertexColor{ _float3{ 0.f, 0.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
+	tempTest1.push_back(tagVertexColor{ _float3{ 0.f, 1.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
+	tempTest1.push_back(tagVertexColor{ _float3{ 0.f, 2.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
+	tempTest1.push_back(tagVertexColor{ _float3{ 0.f, 3.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
+
+
+	/* For.Prototype_Component_VIBuffer_Voxel */
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Voxel"),
+		CVIBuffer_Voxel::Create(m_pGraphic_Device, &tempTest1))))
+		return E_FAIL;
+
 
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니ㅏㄷ.  "));
 

@@ -16,13 +16,12 @@ HRESULT CVIBuffer_Cube::Initialize_Prototype()
 	m_iNumVertices = 8;
 	m_dwFVF = D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_TEXCOORDSIZE3(0)/*| D3DFVF_TEXCOORDSIZE2(0) | D3DFVF_TEXCOORDSIZE3(1)*/;
 	m_ePrimitiveType = D3DPT_TRIANGLELIST;
-	m_iNumPrimitive = 12;
+	m_iNumPrimitive = 16;
 
 	if (FAILED(__super::Create_VertexBuffer()))
 		return E_FAIL;
 
 	VTXCUBETEX*		pVertices = nullptr;
-
 
 	m_pVB->Lock(0, /*m_iStride * m_iNumVertices*/0, (void**)&pVertices, 0);
 
@@ -43,6 +42,7 @@ HRESULT CVIBuffer_Cube::Initialize_Prototype()
 	pVertices[6].vTexture = pVertices[6].vPosition;
 	pVertices[7].vPosition = _float3(-0.5f, -0.5f, 0.5f);
 	pVertices[7].vTexture = pVertices[7].vPosition;
+
 
 	m_pVB->Unlock();
 

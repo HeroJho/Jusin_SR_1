@@ -76,6 +76,12 @@
     <Filter Include="03.GameObjects\LandObject">
       <UniqueIdentifier>{2bb5d4a3-28d9-477b-8577-10ccffa76443}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Components\VIBuffer\Voxel">
+      <UniqueIdentifier>{9d7778f2-89f7-4f74-a36f-adf8202648dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Map">
+      <UniqueIdentifier>{deeead02-26b9-4ddb-be8a-6ddf351ee047}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\Base.h">
@@ -162,6 +168,12 @@
     <ClInclude Include="..\public\LandObject.h">
       <Filter>03.GameObjects\LandObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Voxel.h">
+      <Filter>04.Components\VIBuffer\Voxel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map_Manager.h">
+      <Filter>06.Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\Base.cpp">
@@ -229,6 +241,12 @@
     </ClCompile>
     <ClCompile Include="..\private\LandObject.cpp">
       <Filter>03.GameObjects\LandObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Voxel.cpp">
+      <Filter>04.Components\VIBuffer\Voxel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map_Manager.cpp">
+      <Filter>06.Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

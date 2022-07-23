@@ -247,7 +247,7 @@ CVIBuffer_Terrain * CVIBuffer_Terrain::Create(LPDIRECT3DDEVICE9 pGraphic_Device,
 		MSG_BOX(TEXT("Failed To Created : CVIBuffer_Terrain"));
 		Safe_Release(pInstance);
 	}
-
+	 
 	return pInstance;
 }
 
