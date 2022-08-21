@@ -29,7 +29,7 @@ HRESULT CSky::Initialize(void * pArg)
 
 void CSky::Tick(_float fTimeDelta)
 {
-		
+	 	
 }
 
 void CSky::LateTick(_float fTimeDelta)

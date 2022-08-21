@@ -10,6 +10,7 @@
 #include "Effect.h"
 #include "Sky.h"
 #include "UI.h"
+#include "Cube.h"
 
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -65,6 +66,9 @@ HRESULT CLoader::Loading_ForLogoLevel()
 	/* For.Prototype_GameObject_BackGround */ 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BackGround"), CBackGround::Create(m_pGraphic_Device))))
 		return E_FAIL;	
+
+
+
 
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
 	/* 텍스쳐를 로드한다. */
@@ -130,6 +134,13 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Effect"),
 		CEffect::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+
+	/* For.Prototype_GameObject_Cube */
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Cube"),
+		CCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
 	/* 텍스쳐를 로드한다. */

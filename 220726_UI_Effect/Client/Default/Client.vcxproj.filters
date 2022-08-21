@@ -106,6 +106,9 @@
     <ClInclude Include="..\Public\Effect.h">
       <Filter>02.GameObject\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\Cube.h">
+      <Filter>02.GameObject\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\MainApp.cpp">
@@ -152,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Effect.cpp">
       <Filter>02.GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Cube.cpp">
+      <Filter>02.GameObject\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

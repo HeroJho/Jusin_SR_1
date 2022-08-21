@@ -26,8 +26,8 @@ HRESULT CUI::Initialize(void * pArg)
 
 	m_fSizeX = 100.0f;
 	m_fSizeY = 100.0f;
-	m_fX = 50.0f;
-	m_fY = 50.0f;
+	m_fX = g_iWinSizeX / 2.f -100.f;
+	m_fY = g_iWinSizeY / 2.f;
 
 	m_pTransformCom->Set_Scaled(_float3(m_fSizeX, m_fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_fX - g_iWinSizeX * 0.5f, -m_fY + g_iWinSizeY * 0.5f, 0.f));
@@ -41,18 +41,18 @@ HRESULT CUI::Initialize(void * pArg)
 
 void CUI::Tick(_float fTimeDelta)
 {
-	POINT		ptMouse;
-	GetCursorPos(&ptMouse);
+	//POINT		ptMouse;
+	//GetCursorPos(&ptMouse);
 
-	ScreenToClient(g_hWnd, &ptMouse);
+	//ScreenToClient(g_hWnd, &ptMouse);
 
-	RECT		rcUI;
-	SetRect(&rcUI, m_fX - m_fSizeX * 0.5f, m_fY - m_fSizeY * 0.5f, m_fX + m_fSizeX * 0.5f, m_fY + m_fSizeY * 0.5f);
+	//RECT		rcUI;
+	//SetRect(&rcUI, m_fX - m_fSizeX * 0.5f, m_fY - m_fSizeY * 0.5f, m_fX + m_fSizeX * 0.5f, m_fY + m_fSizeY * 0.5f);
 
-	if (PtInRect(&rcUI, ptMouse))
-	{
-		MSG_BOX(TEXT("충돌"));
-	}
+	//if (PtInRect(&rcUI, ptMouse))
+	//{
+	//	MSG_BOX(TEXT("충돌"));
+	//}
 
 
 	
@@ -68,14 +68,17 @@ void CUI::LateTick(_float fTimeDelta)
 HRESULT CUI::Render()
 {
 
-	_float4x4		Matrix;
+	_float4x4		Matrix, ViewMatrix;
 	D3DXMatrixIdentity(&Matrix);
+	D3DXMatrixIdentity(&ViewMatrix);
 
 	if (FAILED(m_pTextureCom->Bind_Texture(0)))
 		return E_FAIL;
 
-	//m_pGraphic_Device->SetTransform(D3DTS_WORLD, &Matrix);
+
 	m_pTransformCom->Bind_WorldMatrix();
+
+
 	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &Matrix);
 	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &m_ProjMatrix);
 
