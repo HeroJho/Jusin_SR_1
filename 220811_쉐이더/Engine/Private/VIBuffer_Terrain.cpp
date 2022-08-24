@@ -151,7 +151,7 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(const _tchar * pHeightMap)
 			//	
 
 			pVertices[iIndex].vPosition = m_pVerticesPos[iIndex] = _float3(j, (pPixel[iIndex] & 0x000000ff) / 15.0f, i);
-			pVertices[iIndex].vTexture = _float2(j / _float(m_iNumVerticesX - 1) * 30.f, i / _float(m_iNumVerticesZ - 1) * 30.f);
+			pVertices[iIndex].vTexture = _float2(j / _float(m_iNumVerticesX - 1), i / _float(m_iNumVerticesZ - 1));
 		}
 	}
 
@@ -213,8 +213,10 @@ _bool CVIBuffer_Terrain::Picking(CTransform* pTransform, _float3* pOut)
 
 	Safe_AddRef(pPicking);
 
+	_float4x4		WorldMatrixInv = pTransform->Get_WorldMatrixInverse();
 
 	_float3			vRayDir, vRayPos;
+
 	pPicking->Compute_LocalRayInfo(&vRayDir, &vRayPos, pTransform);	
 
 	D3DXVec3Normalize(&vRayDir, &vRayDir);
