@@ -26,11 +26,12 @@ HRESULT CUI::Initialize(void * pArg)
 
 	m_fSizeX = 100.0f;
 	m_fSizeY = 100.0f;
-	m_fX = g_iWinSizeX / 2.f -100.f;
-	m_fY = g_iWinSizeY / 2.f;
+	m_fX = 0.f;
+	m_fY = 0.f;
 
 	m_pTransformCom->Set_Scaled(_float3(m_fSizeX, m_fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_fX - g_iWinSizeX * 0.5f, -m_fY + g_iWinSizeY * 0.5f, 0.f));
+	//m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_fX, m_fY, 0.f));
 
 	
 	
