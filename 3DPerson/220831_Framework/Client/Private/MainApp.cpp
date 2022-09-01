@@ -74,7 +74,6 @@ HRESULT CMainApp::Render()
 #endif // _DEBUG
 
 	
-
 	return S_OK;
 }
 

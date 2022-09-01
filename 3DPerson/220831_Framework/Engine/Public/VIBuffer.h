@@ -28,8 +28,6 @@ protected:
 	_uint						m_iNumPrimitives = 0;
 	_uint						m_iIndexSizeofPrimitive = 0;
 
-
-
 protected:
 	HRESULT Create_VertexBuffer();
 	HRESULT Create_IndexBuffer();
