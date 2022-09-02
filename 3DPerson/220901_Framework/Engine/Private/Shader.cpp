@@ -25,9 +25,6 @@ HRESULT CShader::Initialize_Prototype(const _tchar * pShaderFilePath)
 	if (FAILED(D3DX11CompileEffectFromFile(pShaderFilePath, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, iFlag, 0, m_pDevice, &m_pEffect, nullptr)))
 		return E_FAIL;
 
-	
-
-
 
 	return S_OK;
 }
@@ -61,6 +58,7 @@ CComponent * CShader::Clone(void * pArg)
 	}
 
 	return pInstance;
+}
 
 void CShader::Free()
 {
