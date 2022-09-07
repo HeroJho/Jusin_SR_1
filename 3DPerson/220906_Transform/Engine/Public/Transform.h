@@ -46,6 +46,9 @@ public:
 
 	void Set_State(STATE eState, _fvector vState);
 
+	void Set_Scale(_fvector vScaleInfo);
+	_float3 Get_Scale();
+
 public:
 	virtual HRESULT Initialize_Prototype();
 	virtual HRESULT Initialize(void* pArg);
@@ -56,8 +59,6 @@ public:
 	void Go_Left(_float fTimeDelta);
 	void Go_Right(_float fTimeDelta);
 
-	void Set_Scale(_fvector vScaleInfo);
-	_float3 Get_Scale();
 
 	void Turn(_fvector vAxis, _float fTimeDelta);
 	void Rotation(_fvector vAxis, _float fRadian);
