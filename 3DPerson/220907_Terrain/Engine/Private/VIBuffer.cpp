@@ -49,14 +49,13 @@ HRESULT CVIBuffer::Render()
 		0, 
 	};
 
-	m_pContext->IASetVertexBuffers(0, m_iNumVertexBuffers, pVertexBuffers, iStrides, iOffsets);
-
-	m_pContext->IASetIndexBuffer(m_pIB, m_eIndexFormat, 0);
-
-	m_pContext->IASetPrimitiveTopology(m_eTopology);
-
-	// m_pContext->IASetInputLayout()
-
+	// 버텍스 버퍼 설정
+	m_pContext->IASetVertexBuffers(0, m_iNumVertexBuffers, pVertexBuffers, iStrides, iOffsets); 
+	// 인덱스 버퍼 설정
+	m_pContext->IASetIndexBuffer(m_pIB, m_eIndexFormat, 0); 
+	// 어떤 도형으로 그릴건지 명시
+	m_pContext->IASetPrimitiveTopology(m_eTopology); 
+	// 그린다.
 	m_pContext->DrawIndexed(m_iNumPrimitives * m_iNumIndicesofPrimitive, 0, 0);
 
 	return S_OK;

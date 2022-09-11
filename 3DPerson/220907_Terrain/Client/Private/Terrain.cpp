@@ -46,18 +46,22 @@ HRESULT CTerrain::Render()
 
 	CGameInstance*		pGameInstance = GET_INSTANCE(CGameInstance);	
 
+	// 셰이더에 값을 넘겨준다.
 	m_pShaderCom->Set_RawValue("g_WorldMatrix", &m_pTransformCom->Get_WorldFloat4x4_TP(), sizeof(_float4x4));
 	m_pShaderCom->Set_RawValue("g_ViewMatrix", &pGameInstance->Get_TransformFloat4x4_TP(CPipeLine::D3DTS_VIEW), sizeof(_float4x4));
 	m_pShaderCom->Set_RawValue("g_ProjMatrix", &pGameInstance->Get_TransformFloat4x4_TP(CPipeLine::D3DTS_PROJ), sizeof(_float4x4));
 
 	RELEASE_INSTANCE(CGameInstance);
 
+	// 셰이더에 텍스쳐 정보를 넘겨준다.
 	if (FAILED(m_pTextureCom->Set_SRV(m_pShaderCom, "g_DiffuseTexture")))
 		return E_FAIL;
 
+	// 해당 셰이더의 0번째 Pass로 세팅한다.
 	if (FAILED(m_pShaderCom->Begin(0)))
 		return E_FAIL;
 
+	// 그린다.
 	if (FAILED(m_pVIBufferCom->Render()))
 		return E_FAIL;
 
