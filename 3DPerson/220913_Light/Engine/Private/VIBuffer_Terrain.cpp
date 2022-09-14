@@ -30,6 +30,8 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(const _tchar* pHeighitMapFilePat
 
 	CloseHandle(hFile);
 
+
+	// 버텍스 단계에서는 폴리곤을 공유하는 점들을 찾아 외적하여 노말 벡터를 구할 수 없다.
 #pragma region VERTEXBUFFER
 	m_iNumVertexBuffers = 1;
 	m_iNumVerticesX = ih.biWidth;
@@ -59,6 +61,10 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(const _tchar* pHeighitMapFilePat
 
 #pragma endregion
 
+
+
+
+	// 모든 정점들의 위치가 구해졌고, 폴리곤을 공유한 점들을 쉽게 찾을 수 있기 때문에 인덱스에서 정점 노말 벡터를 구해준다.
 #pragma region INDEXBUFFER
 	m_iNumPrimitives = (m_iNumVerticesX - 1) * (m_iNumVerticesZ - 1) * 2;
 	m_iIndexSizeofPrimitive = sizeof(FACEINDICES32);
@@ -90,11 +96,14 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(const _tchar* pHeighitMapFilePat
 			pIndices[iNumFaces]._1 = iIndices[1];
 			pIndices[iNumFaces]._2 = iIndices[2];
 
+			// 두 점에 대한 벡터 2개를 구한다.
 			vSourDir = XMLoadFloat3(&pVertices[pIndices[iNumFaces]._1].vPosition) - XMLoadFloat3(&pVertices[pIndices[iNumFaces]._0].vPosition);
 			vDestDir = XMLoadFloat3(&pVertices[pIndices[iNumFaces]._2].vPosition) - XMLoadFloat3(&pVertices[pIndices[iNumFaces]._1].vPosition);
 
+			// 외적한다.
 			vNormal = XMVector3Normalize(XMVector3Cross(vSourDir, vDestDir));
 
+			// 외적 결과를 기존 법선 벡터에 더한다.
 			XMStoreFloat3(&pVertices[pIndices[iNumFaces]._0].vNormal, 
 				XMLoadFloat3(&pVertices[pIndices[iNumFaces]._0].vNormal) + vNormal);
 			XMStoreFloat3(&pVertices[pIndices[iNumFaces]._1].vNormal,
@@ -108,11 +117,14 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(const _tchar* pHeighitMapFilePat
 			pIndices[iNumFaces]._1 = iIndices[2];
 			pIndices[iNumFaces]._2 = iIndices[3];
 
+			// 두 점에 대한 벡터 2개를 구한다.
 			vSourDir = XMLoadFloat3(&pVertices[pIndices[iNumFaces]._1].vPosition) - XMLoadFloat3(&pVertices[pIndices[iNumFaces]._0].vPosition);
 			vDestDir = XMLoadFloat3(&pVertices[pIndices[iNumFaces]._2].vPosition) - XMLoadFloat3(&pVertices[pIndices[iNumFaces]._1].vPosition);
 
+			// 외적한다.
 			vNormal = XMVector3Normalize(XMVector3Cross(vSourDir, vDestDir));
 
+			// 외적 결과를 기존 법선 벡터에 더한다.
 			XMStoreFloat3(&pVertices[pIndices[iNumFaces]._0].vNormal,
 				XMLoadFloat3(&pVertices[pIndices[iNumFaces]._0].vNormal) + vNormal);
 			XMStoreFloat3(&pVertices[pIndices[iNumFaces]._1].vNormal,
@@ -124,9 +136,16 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(const _tchar* pHeighitMapFilePat
 		}
 	}	
 
+	// 법선 벡터의 합들을 노말라이즈 한다.
 	for (_uint i = 0; i < m_iNumVertices; ++i)
 		XMStoreFloat3(&pVertices[i].vNormal, XMVector3Normalize(XMLoadFloat3(&pVertices[i].vNormal)));
 
+
+#pragma endregion
+
+
+
+	// 버텍스 ,인덱스 버퍼를 생성한다.
 	ZeroMemory(&m_BufferDesc, sizeof(D3D11_BUFFER_DESC));
 	m_BufferDesc.ByteWidth = m_iNumVertices * m_iStride;
 	m_BufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -159,7 +178,7 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(const _tchar* pHeighitMapFilePat
 	Safe_Delete_Array(pVertices);
 	Safe_Delete_Array(pIndices);
 
-#pragma endregion
+
 
 
 	return S_OK;

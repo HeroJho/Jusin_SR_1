@@ -7,12 +7,12 @@ namespace Engine
 	{
 		enum TYPE { TYPE_POINT, TYPE_DIRECTIONAL, TYPE_END };
 
-		TYPE			eType;
+		TYPE			eType; // ºû Å¸ÀÔ
 
-		XMFLOAT4		vDirection;
+		XMFLOAT4		vDirection; // Direct Light
 
-		XMFLOAT4		vDiffuse;
-		XMFLOAT4		vAmbient;
+		XMFLOAT4		vDiffuse; // ¹æÇâ±¤ »ö(Direct Light »ö)
+		XMFLOAT4		vAmbient; // È¯°æ±¤ »ö
 
 	}LIGHTDESC;
 
