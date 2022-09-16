@@ -42,6 +42,8 @@ private:
 private:
 	HRESULT Ready_Components();
 	HRESULT SetUp_ShaderResources(); /* 셰이더 전역변수에 값 던진다. */
+
+
 	HRESULT Ready_FilterTexture();
 
 

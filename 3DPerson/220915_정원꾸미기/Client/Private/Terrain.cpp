@@ -146,14 +146,12 @@ HRESULT CTerrain::SetUp_ShaderResources()
 		return E_FAIL;
 	if (FAILED(m_pTextureCom[TYPE_DIFFUSE]->Set_SRV(m_pShaderCom, "g_DiffuseTexture1", 1)))
 		return E_FAIL;
-	//if (FAILED(m_pTextureCom[TYPE_FILTER]->Set_SRV(m_pShaderCom, "g_FilterTexture")))
-	//	return E_FAIL;
-
-	if (FAILED(m_pShaderCom->Set_ShaderResourceView("g_FilterTexture", m_pFilterSRV)))
+	if (FAILED(m_pTextureCom[TYPE_FILTER]->Set_SRV(m_pShaderCom, "g_FilterTexture")))
 		return E_FAIL;
 
-	/*if (FAILED(m_pTextureCom[TYPE_FILTER]->Set_SRV(m_pShaderCom, "g_FilterTexture")))
-		return E_FAIL;*/
+	//if (FAILED(m_pShaderCom->Set_ShaderResourceView("g_FilterTexture", m_pFilterSRV)))
+	//	return E_FAIL;
+
 
 
 
@@ -165,6 +163,7 @@ HRESULT CTerrain::SetUp_ShaderResources()
 
 HRESULT CTerrain::Ready_FilterTexture()
 {
+	// 2D Texture를 만든다
 	ID3D11Texture2D*		pTexture = nullptr;
 
 	D3D11_TEXTURE2D_DESC	TextureDesc;
@@ -172,24 +171,25 @@ HRESULT CTerrain::Ready_FilterTexture()
 
 	TextureDesc.Width = 256;
 	TextureDesc.Height = 256;
-	TextureDesc.MipLevels = 1;
+	TextureDesc.MipLevels = 1;   // 밉 하나
 	TextureDesc.ArraySize = 1;
-	TextureDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+	TextureDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;  // 색 저장
 
 	TextureDesc.SampleDesc.Quality = 0;
 	TextureDesc.SampleDesc.Count = 1;
 
-	TextureDesc.Usage = D3D11_USAGE_DYNAMIC;
-	TextureDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-	TextureDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	TextureDesc.Usage = D3D11_USAGE_DYNAMIC;      // 동적 배열!!
+	TextureDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE; // 쉐이더 리소스로 사용
+	TextureDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE; // CPU가 해당 메모리 공간에 접근 가능해야 함!
 	TextureDesc.MiscFlags = 0;
 
 	if (FAILED(m_pDevice->CreateTexture2D(&TextureDesc, nullptr, &pTexture)))
 		return E_FAIL;
-
+	// 쉐이더에 던질거니 리소스 뷰로 만든다.
 	if (FAILED(m_pDevice->CreateShaderResourceView(pTexture, nullptr, &m_pFilterSRV)))
 		return E_FAIL;
 
+	// 일단 임시 배열에 흰색을 채운다.
 	_ulong*		pPixel = new _ulong[256 * 256];
 	ZeroMemory(pPixel, sizeof(_ulong) * (256 * 256));
 
@@ -209,14 +209,25 @@ HRESULT CTerrain::Ready_FilterTexture()
 	
 	D3D11_MAPPED_SUBRESOURCE		SubResource;
 
+	// 락!
+	// 2: 밉맵이 있다면 몇 번째 밉맵
+	// 3: 디스카드-> 버퍼의 이전 값을 완전히 폐기하고, 노 오버라이트-> 기존 값을 그대로 살려서
+	// 디스카드가 좀 더 성능이 좋으니, 기존 값이 필요없다면 디스카드로 하자.
+	// 4: 의미 없다 0
+	// 5: 해당 동적 배열의 주솟값을 구조체 안에 있는 void*에 넣어준다.
 	m_pContext->Map(pTexture, 0, D3D11_MAP_WRITE_DISCARD, 0, &SubResource);
 
+	// 미리 채워놨던 색 값들 복사
 	memcpy(SubResource.pData, pPixel, sizeof(_ulong) * 256 * 256);
 
+	// 언락!
 	m_pContext->Unmap(pTexture, 0);
 
+	// 텍스처를 파일로 만드는 함수
 	if (FAILED(DirectX::SaveDDSTextureToFile(m_pContext, pTexture, TEXT("../Bin/Filter.dds"))))
 		return E_FAIL;
+
+	Safe_Release(pPixel);
 
 	return S_OK;
 }
