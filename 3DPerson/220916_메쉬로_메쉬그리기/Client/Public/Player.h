@@ -34,8 +34,6 @@ private:
 	CTransform*				m_pTransformCom = nullptr;
 	CModel*					m_pModelCom = nullptr;
 
-
-
 private:
 	HRESULT Ready_Components();
 
