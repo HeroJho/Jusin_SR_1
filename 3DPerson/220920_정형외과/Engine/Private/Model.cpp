@@ -181,9 +181,6 @@ HRESULT CModel::Ready_Animations()
 		aiAnimation*		pAIAnimation = m_pAIScene->mAnimations[i];
 	}
 
-	
-
-	
 	return S_OK;
 }
 

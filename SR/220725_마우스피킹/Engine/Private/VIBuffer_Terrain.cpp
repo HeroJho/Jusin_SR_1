@@ -41,7 +41,27 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(_uint iNumVerticesX, _uint iNumV
 			/* 루프가 하나씩 진행될때마다 1씩증가하는 인덱스를 얻어오기위한.  */
 			_uint		iIndex = i * m_iNumVerticesX + j;
 
-			pVertices[iIndex].vPosition = _float3(j, 0.0f, i);
+
+			_float fX = j - 50.f;
+			_float fZ = i - 50.f;
+			_float3 vPos = { fX, 0.f, fZ };
+
+			_float fH = 10.f;
+			_float fRange = 10.f;
+			_float3 vPoint = { 0.f, 0.f, 0.f };
+
+			_float3 fDis = vPoint - vPos;
+			_float fLen = D3DXVec3Length(&fDis);
+			
+			if (fRange > fLen)
+			{
+				_float fAcc = (fRange - fLen) / fRange;
+				if (0.5f < fAcc)
+					fAcc = 0.5f;
+				vPos.y = fH * fAcc;
+			}
+				
+			pVertices[iIndex].vPosition = vPos;
 			pVertices[iIndex].vTexture = _float2(j / _float(m_iNumVerticesX - 1) * 30.f, i / _float(m_iNumVerticesZ - 1) * 30.f);
 		}
 	}

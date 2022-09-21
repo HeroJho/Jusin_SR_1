@@ -21,11 +21,11 @@ public:
 	HRESULT Initialize(aiNode* pAINode, _uint iDepth);
 
 private:
-	char				m_szName[MAX_PATH] = "";
-	_float4x4			m_Transformation;
-	_float4x4			m_CombinedTransformation;
-	CHierarchyNode*		m_pParent = nullptr;
-	_uint				m_iDepth = 0;
+	char				m_szName[MAX_PATH] = "";	// 해당 뼈의 이름
+	_float4x4			m_Transformation;			// 해당 뼈의 행렬
+	_float4x4			m_CombinedTransformation;	// 부모 행렬이 적용된 행렬
+	CHierarchyNode*		m_pParent = nullptr;		// 부모
+	_uint				m_iDepth = 0;				// 벡터 정렬을 위한 깊이 값
 
 public:
 	static CHierarchyNode* Create(aiNode* pAINode, _uint iDepth);
