@@ -30,8 +30,8 @@ HRESULT CUI::Initialize(void * pArg)
 	m_fY = 0.f;
 
 	m_pTransformCom->Set_Scaled(_float3(m_fSizeX, m_fSizeY, 1.f));
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_fX - g_iWinSizeX * 0.5f, -m_fY + g_iWinSizeY * 0.5f, 0.f));
-	//m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_fX, m_fY, 0.f));
+	// m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_fX - g_iWinSizeX * 0.5f, -m_fY + g_iWinSizeY * 0.5f, 0.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_fX, m_fY, 0.f));
 
 	
 	
