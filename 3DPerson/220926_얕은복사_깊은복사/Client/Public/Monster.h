@@ -8,7 +8,7 @@ class CShader;
 class CTexture;
 class CRenderer;
 class CTransform;
-class CModel;
+class CBinModel;
 END
 
 BEGIN(Client)
@@ -32,7 +32,7 @@ private:
 
 	CRenderer*				m_pRendererCom = nullptr;
 	CTransform*				m_pTransformCom = nullptr;
-	CModel*					m_pModelCom = nullptr;
+	CBinModel*					m_pModelCom = nullptr;
 
 
 

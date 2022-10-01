@@ -91,6 +91,21 @@
     <ClCompile Include="..\private\Channel.cpp">
       <Filter>03.Components\06.Model\Animation\Channel</Filter>
     </ClCompile>
+    <ClCompile Include="..\private\BinModel.cpp">
+      <Filter>03.Components\07.BinModel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\BinChannel.cpp">
+      <Filter>03.Components\07.BinModel\Animation\Channel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\BinAnimation.cpp">
+      <Filter>03.Components\07.BinModel\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\BinHierarchyNode.cpp">
+      <Filter>03.Components\07.BinModel\HierarchyNode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\BinMeshContainer.cpp">
+      <Filter>03.Components\07.BinModel\MeshContainer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\Engine_Defines.h">
@@ -198,6 +213,21 @@
     <ClInclude Include="..\public\Channel.h">
       <Filter>03.Components\06.Model\Animation\Channel</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\BinModel.h">
+      <Filter>03.Components\07.BinModel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\BinChannel.h">
+      <Filter>03.Components\07.BinModel\Animation\Channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\BinAnimation.h">
+      <Filter>03.Components\07.BinModel\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\BinHierarchyNode.h">
+      <Filter>03.Components\07.BinModel\HierarchyNode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\BinMeshContainer.h">
+      <Filter>03.Components\07.BinModel\MeshContainer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="99.Defines">
@@ -295,6 +325,21 @@
     </Filter>
     <Filter Include="03.Components\06.Model\Animation\Channel">
       <UniqueIdentifier>{eaf46b2e-7adf-448e-b337-37e974509e75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\07.BinModel">
+      <UniqueIdentifier>{5974c5cf-f09a-483c-be08-85abad796025}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\07.BinModel\MeshContainer">
+      <UniqueIdentifier>{56edaaea-b948-436a-9dbe-232375661e08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\07.BinModel\HierarchyNode">
+      <UniqueIdentifier>{3f5aa68b-6d5c-4a3d-bfa4-4671ac4bcd43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\07.BinModel\Animation">
+      <UniqueIdentifier>{8df3c829-e5b6-4e5c-af8c-09dbd8811440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\07.BinModel\Animation\Channel">
+      <UniqueIdentifier>{8c06e41f-ebac-4395-8d06-c25db09ee3ad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

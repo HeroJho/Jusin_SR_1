@@ -143,4 +143,89 @@ namespace Engine
 
 	}GRAPHICDESC;
 
+
+
+
+	// For. Data
+
+	typedef struct tagHeroHierarchyNode
+	{
+
+		char cName[MAX_PATH];
+		char cParent[MAX_PATH];
+		int  iDepth;
+		XMFLOAT4X4 mTransform;
+
+	}DATA_HERONODE;
+
+	typedef struct tagHeroMaterial
+	{
+
+		char cNames[AI_TEXTURE_TYPE_MAX][MAX_PATH];
+
+	}DATA_HEROMATERIAL;
+
+
+	typedef struct tagHeroBone
+	{
+		char		cNames[MAX_PATH];
+		XMFLOAT4X4	mOffsetTransform;
+	}DATA_HEROBONE;
+
+	typedef struct tagHeroMesh
+	{
+		char				cName[MAX_PATH];
+		int					iMaterialIndex;
+
+		int					NumVertices;
+		VTXMODEL*			pNonAnimVertices;
+		VTXANIMMODEL*		pAnimVertices;
+
+		int					iNumPrimitives;
+		FACEINDICES32*		pIndices;
+
+		int					iNumBones;
+		DATA_HEROBONE*		pBones;
+
+	}DATA_HEROMETH;
+
+
+	typedef struct tagHeroChannel
+	{
+
+		char				szName[MAX_PATH];
+		int					iNumKeyFrames;
+		KEYFRAME*			pKeyFrames;
+
+	}DATA_HEROCHANNEL;
+	typedef struct tagHeroAnim
+	{
+
+		int					iNumChannels;
+		float				fDuration;
+		float				fTickPerSecond;
+		DATA_HEROCHANNEL*	pHeroChannel;
+
+
+	}DATA_HEROANIM;
+
+	typedef struct tagHeroScene
+	{
+
+		int iNodeCount;
+		DATA_HERONODE* pHeroNodes;
+
+		int iMaterialCount;
+		DATA_HEROMATERIAL* pHeroMaterial;
+
+		int iMeshCount;
+		DATA_HEROMETH* pHeroMesh;
+
+		int iNumAnimations;
+		DATA_HEROANIM* pHeroAnim;
+
+	}DATA_HEROSCENE;
+
+
+
 }

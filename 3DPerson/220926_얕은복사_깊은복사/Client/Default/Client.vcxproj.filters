@@ -96,6 +96,7 @@
     <ClInclude Include="..\Public\Monster.h">
       <Filter>02.GameObjects\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\DataManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -134,6 +135,7 @@
     <ClCompile Include="..\Private\Monster.cpp">
       <Filter>02.GameObjects\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="..\private\DataManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">

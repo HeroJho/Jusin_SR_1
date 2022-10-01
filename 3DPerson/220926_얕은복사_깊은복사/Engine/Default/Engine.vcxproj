@@ -156,6 +156,11 @@
   <ItemGroup>
     <ClCompile Include="..\private\Animation.cpp" />
     <ClCompile Include="..\Private\Base.cpp" />
+    <ClCompile Include="..\private\BinAnimation.cpp" />
+    <ClCompile Include="..\private\BinChannel.cpp" />
+    <ClCompile Include="..\private\BinHierarchyNode.cpp" />
+    <ClCompile Include="..\private\BinMeshContainer.cpp" />
+    <ClCompile Include="..\private\BinModel.cpp" />
     <ClCompile Include="..\Private\Camera.cpp" />
     <ClCompile Include="..\private\Channel.cpp" />
     <ClCompile Include="..\Private\Component.cpp" />
@@ -188,6 +193,11 @@
   <ItemGroup>
     <ClInclude Include="..\public\Animation.h" />
     <ClInclude Include="..\Public\Base.h" />
+    <ClInclude Include="..\public\BinAnimation.h" />
+    <ClInclude Include="..\public\BinChannel.h" />
+    <ClInclude Include="..\public\BinHierarchyNode.h" />
+    <ClInclude Include="..\public\BinMeshContainer.h" />
+    <ClInclude Include="..\public\BinModel.h" />
     <ClInclude Include="..\Public\Camera.h" />
     <ClInclude Include="..\public\Channel.h" />
     <ClInclude Include="..\Public\Component.h" />

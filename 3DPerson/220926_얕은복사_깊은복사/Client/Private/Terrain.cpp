@@ -258,7 +258,7 @@ void CTerrain::Free()
 	for (auto& pTextureCom : m_pTextureCom)	
 		Safe_Release(pTextureCom);	
 	
-	//Safe_Release(m_pFilterSRV);
+	Safe_Release(m_pFilterSRV);
 	Safe_Release(m_pVIBufferCom);
 	Safe_Release(m_pShaderCom);
 	Safe_Release(m_pRendererCom);

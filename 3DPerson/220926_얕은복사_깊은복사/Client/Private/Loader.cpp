@@ -11,6 +11,8 @@
 //#include "Sky.h"
 //#include "UI.h"
 
+#include "DataManager.h"
+
 
 CLoader::CLoader(ID3D11Device* pDevice, ID3D11DeviceContext* pContext)
 	: m_pDevice(pDevice)
@@ -183,17 +185,33 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 	_matrix		PivotMatrix = XMMatrixIdentity();
 
-	/* For.Prototype_Component_Model_ForkLift */
-	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_ForkLift"),
-		CModel::Create(m_pDevice, m_pContext, CModel::TYPE_NONANIM, "../Bin/Resources/Meshes/ForkLift/", "ForkLift.fbx", PivotMatrix))))
-		return E_FAIL;
+	///* For.Prototype_Component_Model_ForkLift */
+	//PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f) * XMMatrixRotationY(XMConvertToRadians(180.0f));
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_ForkLift"),
+	//	CBinModel::Create(m_pDevice, m_pContext, CBinModel::TYPE_NONANIM, "../Bin/Resources/Meshes/ForkLift/", "ForkLift.fbx", PivotMatrix))))
+	//	return E_FAIL;
 
 
 	/* For.Prototype_Component_Model_Fiona */
-	PivotMatrix = XMMatrixRotationY(XMConvertToRadians(180.0f));
+
+	DATA_HEROSCENE* Scene = new DATA_HEROSCENE;
+	ZeroMemory(Scene, sizeof(DATA_HEROSCENE));
+
+	CDataManager::Get_Instance()->ReadSceneData("", Scene);
+
+	//PivotMatrix = XMMatrixRotationY(XMConvertToRadians(180.0f));
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona"),
+	//	CBinModel::Create(m_pDevice, m_pContext, Scene, CBinModel::TYPE_ANIM, "../Bin/Resources/Meshes/Fiona/", "Fiona.fbx", PivotMatrix))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona"),
+	//	CModel::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Meshes/Fiona/", "Fiona.fbx", PivotMatrix))))
+	//	return E_FAIL;
+
+	PivotMatrix = XMMatrixScaling(0.01f, 0.01f, 0.01f);
+	PivotMatrix *= XMMatrixRotationY(XMConvertToRadians(180.0f));
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Model_Fiona"),
-		CModel::Create(m_pDevice, m_pContext, CModel::TYPE_ANIM, "../Bin/Resources/Meshes/Fiona/", "Fiona.fbx", PivotMatrix))))
+		CBinModel::Create(m_pDevice, m_pContext, Scene, CBinModel::TYPE_ANIM, "../Bin/Resources/Meshes/HatGirl/", "HatGirl.fbx", PivotMatrix))))
 		return E_FAIL;
 
 	///* For.Prototype_Component_VIBuffer_Cube */
