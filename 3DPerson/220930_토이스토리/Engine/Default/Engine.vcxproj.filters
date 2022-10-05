@@ -91,6 +91,9 @@
     <ClCompile Include="..\private\Channel.cpp">
       <Filter>03.Components\06.Model\Animation\Channel</Filter>
     </ClCompile>
+    <ClCompile Include="..\private\Sockat.cpp">
+      <Filter>03.Components\07.Sockat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Public\Engine_Defines.h">
@@ -198,6 +201,9 @@
     <ClInclude Include="..\public\Channel.h">
       <Filter>03.Components\06.Model\Animation\Channel</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\Sockat.h">
+      <Filter>03.Components\07.Sockat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="99.Defines">
@@ -295,6 +301,9 @@
     </Filter>
     <Filter Include="03.Components\06.Model\Animation\Channel">
       <UniqueIdentifier>{eaf46b2e-7adf-448e-b337-37e974509e75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Components\07.Sockat">
+      <UniqueIdentifier>{0c389abd-7b4c-46b1-addd-0501adb2f540}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

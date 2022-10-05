@@ -8,6 +8,7 @@
 #include "VIBuffer_Rect.h"
 //#include "VIBuffer_Cube.h"
 #include "VIBuffer_Terrain.h"
+#include "Sockat.h"
 
 BEGIN(Engine)
 

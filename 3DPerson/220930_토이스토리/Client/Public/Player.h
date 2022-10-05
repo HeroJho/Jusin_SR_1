@@ -10,6 +10,7 @@ class CRenderer;
 class CTransform;
 class CModel;
 class CHierarchyNode;
+class CSockat;
 END
 
 BEGIN(Client)
@@ -32,7 +33,7 @@ public:
 
 private:
 	CShader*				m_pShaderCom = nullptr;
-
+	CSockat*				m_pSockatCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;
 	CTransform*				m_pTransformCom = nullptr;
 	CModel*					m_pModelCom = nullptr;
@@ -48,10 +49,8 @@ private:
 private:
 	HRESULT Ready_Components();
 
-	HRESULT Ready_Sockets();
-	HRESULT Ready_PlayerParts();
+	CGameObject* Add_Sockat(char* pBoneName, _tchar* cName);
 
-	HRESULT Update_Weapon();
 
 public:
 	static CPlayer* Create(ID3D11Device* pDevice, ID3D11DeviceContext* pContext);
