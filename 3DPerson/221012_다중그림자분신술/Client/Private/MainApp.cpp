@@ -10,13 +10,13 @@ CMainApp::CMainApp()
 	: m_pGameInstance(CGameInstance::Get_Instance())
 {
 	//D3D11_RASTERIZER_DESC
-	D3D11_BLEND_DESC
+	//D3D11_BLEND_DESC
 	// D3D11_DEPTH_STENCIL_DESC
 
 
-	m_pContext->RSSetState();
-	m_pContext->OMSetBlendState();
-	m_pContext->OMSetDepthStencilState();
+	//m_pContext->RSSetState();
+	//m_pContext->OMSetBlendState();
+	//m_pContext->OMSetDepthStencilState();
 
 	//D3D11_SAMPLER_DESC
 	// D3D11_SAMPLER_DESC

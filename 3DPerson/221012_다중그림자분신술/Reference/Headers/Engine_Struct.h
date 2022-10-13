@@ -138,6 +138,22 @@ namespace Engine
 		static const D3D11_INPUT_ELEMENT_DESC Elements[iNumElements];
 	}VTXCOL_DECLARATION;
 
+
+	typedef struct tagVertexInstance
+	{		
+		XMFLOAT4		vRight;
+		XMFLOAT4		vUp;
+		XMFLOAT4		vLook;
+		XMFLOAT4		vPosition;
+	}VTXINSTANCE;
+
+	typedef struct ENGINE_DLL tagVertexRectInstance_Declaration
+	{
+		static const unsigned int iNumElements = 6;
+		static const D3D11_INPUT_ELEMENT_DESC Elements[iNumElements];
+	}VTXRECTINSTANCE_DECLARATION;
+
+
 	typedef struct tagGraphicDesc
 	{
 		enum WINMODE { MODE_FULL, MODE_WIN, MODE_END };
