@@ -75,8 +75,9 @@ _bool COBB::Collision(CCollider * pTargetCollider)
 	return m_isColl;
 }
 
-_bool COBB::Collision_OBB(CCollider * pTargetCollider)
+_bool COBB::Collision_OBB(CCollider* pTargetCollider)
 {
+
 	if (CCollider::TYPE_SPHERE == pTargetCollider->Get_ColliderType())
 		return E_FAIL;
 
@@ -109,6 +110,46 @@ _bool COBB::Collision_OBB(CCollider * pTargetCollider)
 
 		}
 	}
+
+
+	// 충돌했다! 어느 면으로 충돌했는지 체크한다.
+	_vector vPushDir;
+	ZeroMemory(&vPushDir, sizeof(_float3));
+
+	// 교차한 면을 구한다.
+	_float3			vPoints[8];
+	m_pOBB->GetCorners(vPoints);
+
+
+	_float3 vPlanDot = vPoints[2];
+	for (_uint i = 0; i < 3; ++i)
+	{
+		_float3 vNorDir = OBBDesc[0].vAlignAxis[i];
+
+		_float fD = -(vNorDir.x * vPlanDot.x) - (vNorDir.y * vPlanDot.y) - (vNorDir.z * vPlanDot.z);
+		_vector vPlan = XMVectorSet(vNorDir.x, vNorDir.y, vNorDir.z, fD);
+
+		PlaneIntersectionType PlanType = ((COBB*)pTargetCollider)->Get_Collider().Intersects(vPlan);
+
+		if (INTERSECTING == PlanType)
+			vPushDir += XMLoadFloat3(&vNorDir);
+	}
+
+	vPlanDot = vPoints[4];
+	for (_uint i = 0; i < 3; ++i)
+	{
+		_float3 vNorDir;
+		XMStoreFloat3(&vNorDir, -1.f * XMLoadFloat3(&OBBDesc[0].vAlignAxis[i]));
+
+		_float fD = -(vNorDir.x * vPlanDot.x) - (vNorDir.y * vPlanDot.y) - (vNorDir.z * vPlanDot.z);
+		_vector vPlan = XMVectorSet(vNorDir.x, vNorDir.y, vNorDir.z, fD);
+
+		PlaneIntersectionType PlanType = ((COBB*)pTargetCollider)->Get_Collider().Intersects(vPlan);
+
+		if (INTERSECTING == PlanType)
+			vPushDir += XMLoadFloat3(&vNorDir);
+	}
+
 
 	m_isColl = true;
 
