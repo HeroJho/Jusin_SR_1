@@ -7,23 +7,27 @@ CQuadTree::CQuadTree()
 
 HRESULT CQuadTree::Initialize(_uint iLT, _uint iRT, _uint iRB, _uint iLB)
 {
+	// 4 코너
 	m_iCorners[CORNER_LT] = iLT;
 	m_iCorners[CORNER_RT] = iRT;
 	m_iCorners[CORNER_RB] = iRB;
 	m_iCorners[CORNER_LB] = iLB;
 
+	// 더 이상 쪼개질 수 없을 때(변의 길이가 1일 때)
 	if (iRT - iLT == 1)
 		return S_OK;
 
+	// 중점
 	m_iCenterIndex = (iLT + iRB) >> 1;
 
+	// 변의 센터
 	_uint		iLC, iTC, iRC, iBC;
-
 	iLC = (iLT + iLB) >> 1;
 	iTC = (iLT + iRT) >> 1;
 	iRC = (iRT + iRB) >> 1;
 	iBC = (iLB + iRB) >> 1;	
 
+	// 재귀적으로 호출하면서 더 이상 쪼개질 수 없을 때까지 만든다.
 	m_pChild[CHILD_LT] = CQuadTree::Create(iLT, iTC, m_iCenterIndex, iLC);
 	m_pChild[CHILD_RT] = CQuadTree::Create(iTC, iRT, iRC, m_iCenterIndex);
 	m_pChild[CHILD_RB] = CQuadTree::Create(m_iCenterIndex, iRC, iRB, iBC);
@@ -34,6 +38,7 @@ HRESULT CQuadTree::Initialize(_uint iLT, _uint iRT, _uint iRB, _uint iLB)
 
 void CQuadTree::Culling(const _float3* pVerticesPos, CFrustum* pFrustum, FACEINDICES32* pFaceIndices, _uint* pNumFaces)
 {
+	// 계속 쪼갯는데, 자식이 없을 때
 	if (nullptr == m_pChild[CHILD_LB])
 	{
 		_uint		iIndices[] = {
@@ -75,8 +80,10 @@ void CQuadTree::Culling(const _float3* pVerticesPos, CFrustum* pFrustum, FACEIND
 		return;
 	}	
 
-	_float		fRadius = XMVectorGetX(XMVector3Length(XMLoadFloat3(&pVerticesPos[m_iCorners[CORNER_LT]]) - XMLoadFloat3(&pVerticesPos[m_iCenterIndex])));
 
+	// 절두체와 충돌할 원의 반지름을 구한다.
+	_float		fRadius = XMVectorGetX(XMVector3Length(XMLoadFloat3(&pVerticesPos[m_iCorners[CORNER_LT]]) - XMLoadFloat3(&pVerticesPos[m_iCenterIndex])));
+	// 충돌했다면 쪼갠다 -> 자식의 Culling 호출
 	if (true == pFrustum->isIn_LocalSpace(XMLoadFloat3(&pVerticesPos[m_iCenterIndex]), fRadius))
 	{
 		for (_uint i = 0; i < CHILD_END; ++i)

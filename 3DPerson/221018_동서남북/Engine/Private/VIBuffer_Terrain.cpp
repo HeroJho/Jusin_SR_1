@@ -182,7 +182,6 @@ HRESULT CVIBuffer_Terrain::Initialize_Prototype(const _tchar* pHeighitMapFilePat
 	if (nullptr == m_pQuadTree)
 		return E_FAIL;
 
-
 	return S_OK;
 }
 
@@ -197,55 +196,14 @@ void CVIBuffer_Terrain::Culling(const CTransform* pTransform)
 
 	pFrustum->Transform_ToLocalSpace(pTransform->Get_WorldMatrixInverse());	
 
-	/*ZeroMemory(m_pFaceIndices, sizeof(FACEINDICES32) * m_iNumPrimitives);*/
+
 
 	_uint			iNumFaces = 0;
 
-	//for (_uint i = 0; i < m_iNumVerticesZ - 1; ++i)
-	//{
-	//	for (_uint j = 0; j < m_iNumVerticesX - 1; ++j)
-	//	{
-	//		_uint		iIndex = i * m_iNumVerticesX + j;
-
-	//		_uint		iIndices[] = {
-	//			iIndex + m_iNumVerticesX,
-	//			iIndex + m_iNumVerticesX + 1,
-	//			iIndex + 1,
-	//			iIndex
-	//		};
-
-	//		_bool		isIn[] = {
-	//			pFrustum->isIn_LocalSpace(XMLoadFloat3(&m_pVerticesPos[iIndices[0]])),
-	//			pFrustum->isIn_LocalSpace(XMLoadFloat3(&m_pVerticesPos[iIndices[1]])),
-	//			pFrustum->isIn_LocalSpace(XMLoadFloat3(&m_pVerticesPos[iIndices[2]])),
-	//			pFrustum->isIn_LocalSpace(XMLoadFloat3(&m_pVerticesPos[iIndices[3]])),
-	//		};
-
-	//		/* 오른쪽 위 삼각형을 그려야한다. */
-	//		if (true == isIn[0] &&
-	//			true == isIn[1] &&
-	//			true == isIn[2])
-	//		{
-	//			m_pFaceIndices[iNumFaces]._0 = iIndices[0];
-	//			m_pFaceIndices[iNumFaces]._1 = iIndices[1];
-	//			m_pFaceIndices[iNumFaces]._2 = iIndices[2];
-	//			++iNumFaces;
-	//		}
-
-	//		/* 왼쪽 하단 삼각형을 그려야한다. */
-	//		if (true == isIn[0] &&
-	//			true == isIn[2] &&
-	//			true == isIn[3])
-	//		{
-	//			m_pFaceIndices[iNumFaces]._0 = iIndices[0];
-	//			m_pFaceIndices[iNumFaces]._1 = iIndices[2];
-	//			m_pFaceIndices[iNumFaces]._2 = iIndices[3];
-	//			++iNumFaces;
-	//		}
-	//	}
-	//}
-
 	m_pQuadTree->Culling(m_pVerticesPos, pFrustum, m_pFaceIndices, &iNumFaces);
+
+
+
 
 	D3D11_MAPPED_SUBRESOURCE		SubResource;
 	ZeroMemory(&SubResource, sizeof(D3D11_MAPPED_SUBRESOURCE));
